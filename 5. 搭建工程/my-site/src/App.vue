@@ -1,0 +1,19 @@
+<template>
+  <div>
+    <h1>App组件</h1>
+    <!-- <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg" :width="100" :height="100" /> -->
+    <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg" :size="100" />
+    <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="150" />
+  </div>
+</template>
+
+<script>
+// 可以省略.vue后缀
+import Avatar from './components/Avatar';
+export default {
+  name: 'App', // 如果组件没有在注册的时候指定名字，则使用该名字
+  components: {
+    Avatar
+  }
+}
+</script>
