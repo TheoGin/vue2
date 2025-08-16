@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="count++">{{count}}</button>
+      <button @click="count++">{{count}}</button>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          count: 0,
+        },
+      });
+    </script>
+  </body>
+</html>

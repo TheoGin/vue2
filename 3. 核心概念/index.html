@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 模板 -> vue -> 真实的dom -->
+    <div id="app">
+      <h1>标题：{{title}}</h1>
+      <ul>
+        <li v-for="(item, index) in products" ::key="item.id">
+          商品名称：{{item.name}}
+          <button @click="changeStock(index, item.stock - 1)">-</button>
+          ，商品库存：{{item.stock || '无货'}}
+          <button @click="changeStock(index, item.stock + 1)">+</button>
+          <button v-on:click="removeStock(index)">删除</button>
+          <!-- 简写 -->
+          <!-- <button @click="removeStock(index)">删除</button> -->
+        </li>
+      </ul>
+      <p>总库存：{{ total }}</p>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      const vm = new Vue({
+        // 配置对象
+        el: "#app",
+        data: {
+          // 页面中要使用的数据
+          title: "商品管理系统",
+          products: [
+            { id: 1, name: "iphone", stock: 10 },
+            { id: 2, name: "xiaomi", stock: 9 },
+            { id: 3, name: "huawei", stock: 8 },
+          ],
+        },
+        computed: {
+          total() {
+            return this.products.reduce(
+              (sum, curItem) => sum + curItem.stock,
+              0
+            );
+          },
+        },
+        methods: {
+          changeStock(index, newStock) {
+            if (newStock < 0) {
+              newStock = 0;
+              return;
+            }
+            this.products[index].stock = newStock; // 数据变化
+          },
+          removeStock(index) {
+            this.products.splice(index, 1);
+          },
+        },
+      });
+      console.log(vm);
+    </script>
+  </body>
+</html>

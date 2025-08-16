@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <div>
+        <h1>第一个vue应用：{{ title }}</h1>
+        <p>作者：{{ author }}</p>
+      </div> -->
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      // 创建一个vue实例
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          title: "Hello World!",
+          author: "Sophotheo",
+        },
+        /* template: `<div>
+          <h1>第一个vue应用：{{ title }}</h1>
+          <p>作者：{{ author }}</p>
+        </div>`, */
+        // render(createVNode) {
+        render(h) {
+          // createVNode 就是用了创建虚拟节点，习惯上写 h
+          // 返回虚拟节点
+          return h("div", [
+            h("h1", `第一个vue应用：${this.title}`),
+            h("p", `作者：${this.author}`),
+          ]);
+        },
+      });
+    </script>
+  </body>
+</html>

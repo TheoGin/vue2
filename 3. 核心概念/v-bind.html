@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <img v-bind:src="imgSrc" alt="" />
+      <!-- 简写 -->
+      <img :src="imgSrc" alt="" />
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      const vm = new Vue({
+        // el: "#app",
+        data: {
+          imgSrc:
+            "https://copyright.bdstatic.com/vcg/creative/7a55323c17ced5b5dfb5ee189a8e4349.jpg@wm_1,k_cGljX2JqaHdhdGVyLmpwZw==",
+        },
+      });
+      vm.$mount("#app");
+    </script>
+  </body>
+</html>
