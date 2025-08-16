@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 无效 -->
+      <!-- <MyButton title1="标题3" title2="标题2" /> -->
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      const myButton = {
+        data() {
+          return {
+            count: 0
+          }
+        },
+        template: `<button @click="count++">当前点击了{{ count }}次</button>`,
+      };
+      const Title = {
+        props: ["title1", "title2"],
+        // 需要用 div 包起来，不然无效
+        /* template: `
+            <h1>{{ title1 }} </h1>
+            <h2>{{ title2 }} </h2>  
+        `, */
+        template: `
+            <div>
+                <h1>{{ title1 }} </h1>
+                <h2>{{ title2 }} </h2>
+
+                <!-- 单项数据流，不要改变 -->
+                <!-- <button @click="title1 = 123">change</button> -->
+                <button>change</button>
+            </div>
+        `,
+      };
+
+      // 全局注册了一个组件
+      //   Vue.component("MyButton", myButton);
+
+      new Vue({
+        // el: '#app',
+        data: {},
+        components: {
+          // 局部注册组件
+          MyButton: myButton,
+          Title,
+        },
+        template: `
+            <div>
+                <MyButton />
+                <Title title1="标题1" title2="标题1-1" /> <!-- 显示 标题1 -->
+                <Title title1="标题2" title2="标题2-1" /> <!-- 显示 标题2 -->
+                <Title title1="标题3" title2="标题3-1" /> <!-- 显示 标题3 -->    
+            </div>
+        `,
+      }).$mount("#app");
+    </script>
+  </body>
+</html>
