@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>App组件</h1>
     <Pager 
       :total="total" 
       :current="current" 
@@ -15,9 +16,10 @@
 </template>
 
 <script>
-import Pager from "./";
+import Pager from "./components/Pager/index.vue";
 
 export default {
+  name: "App",
   components: {
     Pager,
   },
