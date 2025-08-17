@@ -10,7 +10,6 @@
 // 可以省略.vue后缀
 import Avatar from './';
 export default {
-  name: 'App', // 如果组件没有在注册的时候指定名字，则使用该名字
   components: {
     Avatar
   }

@@ -12,7 +12,6 @@ import Icon from "./";
 import { types } from "./index.vue";
 
 export default {
-  name: "App",
   components: {
     Icon,
   },
