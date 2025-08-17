@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Pager from "./components/Pager.vue";
+import Pager from "./components/Pager/index.vue";
 
 export default {
   name: "App",

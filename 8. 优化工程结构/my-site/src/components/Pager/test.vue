@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>App组件</h1>
     <Pager 
       :total="total" 
       :current="current" 
@@ -16,10 +15,10 @@
 </template>
 
 <script>
-import Pager from "./components/Pager.vue";
+// 不写默认会找 index.vue
+import Pager from "./";
 
 export default {
-  name: "App",
   components: {
     Pager,
   },
