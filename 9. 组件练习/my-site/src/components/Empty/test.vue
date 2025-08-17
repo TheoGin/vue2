@@ -20,9 +20,10 @@ export default {
 
 <style scoped lang="less">
 .test-container {
+  position: relative;
   border: 1px solid;
   width: 500px;
-  height: 300px;
+  height: 400px;
   margin: 0 auto;
 }
 </style>

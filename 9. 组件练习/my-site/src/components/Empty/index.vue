@@ -1,9 +1,9 @@
 <template>
   <div class="empty-container">
     <Icon type="empty" />
-    <span class="text">
+    <p class="text">
       {{ text }}
-    </span>
+    </p>
   </div>
 </template>
 
@@ -24,17 +24,21 @@ export default {
 
 <style scoped lang="less">
 @import "~@/styles/var.less";
+@import "~@/styles/mixin.less";
+
 .empty-container {
-  display: flex;
-  flex-direction: column;
   text-align: center;
-  .icon-container {
-    font-size: 72px;
-    color: @gray;
-  }
-  .text {
-    color: @lightWords;
-    margin: 1em 0;
-  }
+  color: @gray;
+
+  // 很多地方都可能会用到居中 ——》抽离成 mixin
+  .self-center();
+  /* position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); */
+}
+
+.icon-container {
+  font-size: 72px;
 }
 </style>

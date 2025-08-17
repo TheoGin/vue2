@@ -1,0 +1,9 @@
+// 提供各种混合样式
+
+// 不传默认为 绝对定位
+.self-center(@pos: absolute) {
+  position: @pos;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
