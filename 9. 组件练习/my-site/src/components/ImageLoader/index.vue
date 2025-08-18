@@ -1,7 +1,21 @@
 <template>
   <div class="image-loader-container">
-    <img v-if="loadingFinish" :src="src" alt="" />
-    <img v-else :src="placeholder" alt="" />
+    <img
+      class="placeholder"
+      v-if="!transitionAndImgFinish"
+      :src="placeholder"
+      alt=""
+    />
+    <!-- 自带事件 load -->
+    <img
+      @load="handleLoad"
+      :style="{
+        opacity: opacityVal,
+        transition: duration + 'ms'
+      }"
+      :src="src"
+      alt=""
+    />
   </div>
 </template>
 
@@ -23,26 +37,45 @@ export default {
   },
   data() {
     return {
-      loadingFinish: false,
+      imgLoadingFinish: false, //  原图是否加载完成
+      transitionAndImgFinish: false, // 是否一切都尘埃落定了
     };
   },
-  onMounted(){
-    console.log(111);
-    
-    setTimeout(() => {
-        this.loadingFinish = true;
-    }, this.duration);
+  computed: {
+    opacityVal() {
+      return this.imgLoadingFinish ? 1 : 0;
+    },
+  },
+  methods: {
+    handleLoad() {
+      this.imgLoadingFinish = true;
+
+      setTimeout(() => {
+        this.transitionAndImgFinish = true;
+        this.$emit('load');
+      }, this.duration);
+    },
   },
 };
 </script>
 
 <style scoped lang="less">
+@import "~@/styles/mixin.less";
+
 .image-loader-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
   img {
-    width: 100%;
-    height: 100%;
+    .self-fill();
     object-fit: cover;
     display: block;
+  }
+  .placeholder {
+    // CSS3属性：虚化filter
+    // filter: blur(20px);
+    filter: blur(2vw);
   }
 }
 </style>
