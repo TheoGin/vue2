@@ -5,12 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build --modern",
-    "test:Pager": "vue serve ./src/components/Pager/test.vue",
-    "test:Avatar": "vue serve ./src/components/Avatar/test.vue",
-    "test:Icon": "vue serve ./src/components/Icon/test.vue",
-    "test:Empty": "vue serve ./src/components/Empty/test.vue",
-    "test:ImageLoader": "vue serve ./src/components/ImageLoader/test.vue",
-    "test:Contact": "vue serve ./src/components/Contact/test.vue"
+    "test:Pager": "vue serve ./src/components/Pager/test.vue --open",
+    "test:Avatar": "vue serve ./src/components/Avatar/test.vue --open",
+    "test:Icon": "vue serve ./src/components/Icon/test.vue --open",
+    "test:Empty": "vue serve ./src/components/Empty/test.vue --open",
+    "test:ImageLoader": "vue serve ./src/components/ImageLoader/test.vue --open",
+    "test:Contact": "vue serve ./src/components/Contact/test.vue --open",
+    "test:Menu": "vue serve ./src/components/Menu/test.vue --open"
   },
   "dependencies": {
     "axios": "^0.21.0",
