@@ -10,8 +10,9 @@
     "test:Icon": "vue serve ./src/components/Icon/test.vue --open",
     "test:Empty": "vue serve ./src/components/Empty/test.vue --open",
     "test:ImageLoader": "vue serve ./src/components/ImageLoader/test.vue --open",
-    "test:Contact": "vue serve ./src/components/Contact/test.vue --open",
-    "test:Menu": "vue serve ./src/components/Menu/test.vue --open"
+    "test:Contact": "vue serve ./src/components/SiteAside/Contact/test.vue --open",
+    "test:Menu": "vue serve ./src/components/SiteAside/Menu/test.vue --open",
+    "test:SiteAside": "vue serve ./src/components/SiteAside/test.vue --open"
   },
   "dependencies": {
     "axios": "^0.21.0",

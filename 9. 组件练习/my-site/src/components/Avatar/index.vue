@@ -14,7 +14,6 @@ export default {
     url: {
       type: String, // url属性必须是一个字符串，否则 [Vue warn]: Invalid prop: type check failed for prop "url". Expected String, got Array
       required: true, // 要求属性必填，否则 [Vue warn]:Missing required prop: "url"
-      default: 150,
     },
     /* width: {
       type: Number,
@@ -28,6 +27,7 @@ export default {
     size: {
       type: Number,
       // required: true,
+      default: 150,
     },
   },
 };

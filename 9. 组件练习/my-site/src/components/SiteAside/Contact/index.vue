@@ -53,8 +53,8 @@ export default {
 @import "~@/styles/var.less";
 
 .contact-container {
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
   // 颜色不要写死
   color: @gray;
   font-size: 20px;
