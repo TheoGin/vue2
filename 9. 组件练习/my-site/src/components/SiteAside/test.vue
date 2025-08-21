@@ -25,7 +25,7 @@ export default {
 .test-container {
   border: 1px solid;
   width: 250px;
-  background-color: @dark;
+  height: 600px;
   margin: 0 auto;
 }
 </style>
