@@ -7,8 +7,8 @@
         </div>
       </template>
       <template #default>
-        <!-- <div class="main"> </div> -->
-         中间主区域
+        <!-- <router-view></router-view> -->
+        <RouterView></RouterView>
       </template>
       <template #right>
         <div class="right">右区域</div>
