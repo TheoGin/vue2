@@ -11,6 +11,10 @@
   transform: translate(-50%, -50%) translateY(25px);
   opacity: 0;
   transition: 0.4s;
+  z-index: 999;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+  line-height: 2;
+  white-space: nowrap;
 }
 .message-info {
   background-color: #6b9eee;
@@ -25,5 +29,6 @@
   background-color: #cc3600;
 }
 .icon {
-  margin-right: 5px;
+  margin-right: 7px;
+  font-size: 20px;
 }

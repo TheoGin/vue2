@@ -10,7 +10,13 @@
   border-radius: 5px;
   transform: translate(-50%, -50%) translateY(25px);
   opacity: 0;
-  transition: .4s;
+  transition: 0.4s;
+  z-index: 999;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+  line-height: 2;
+
+  // 靠右时会被挤压，所以需要加上 white-space: nowrap;
+  white-space: nowrap;
 
   &-info {
     background-color: @primary;
@@ -30,5 +36,6 @@
 }
 
 .icon {
-  margin-right: 5px;
+  margin-right: 7px;
+  font-size: 20px;
 }
