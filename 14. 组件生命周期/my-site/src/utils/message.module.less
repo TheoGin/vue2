@@ -1,0 +1,41 @@
+@import "../styles/mixin.less";
+@import "../styles/var.less";
+
+.message {
+  .self-center();
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 5px;
+  transform: translate(-50%, -50%) translateY(25px);
+  opacity: 0;
+  transition: 0.4s;
+  z-index: 999;
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+  line-height: 2;
+
+  // 靠右时会被挤压，所以需要加上 white-space: nowrap;
+  white-space: nowrap;
+
+  &-info {
+    background-color: @primary;
+  }
+
+  &-success {
+    background-color: @success;
+  }
+
+  &-warn {
+    background-color: @warn;
+  }
+
+  &-error {
+    background-color: @danger;
+  }
+}
+
+.icon {
+  margin-right: 7px;
+  font-size: 20px;
+}
