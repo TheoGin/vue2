@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="container">
+  <div class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
@@ -7,7 +7,7 @@
       }"
     >
       <li v-for="item in banners" :key="item.id">
-        <CarouselItem :item="item" />
+        <CarouselItem :carousel="item" />
       </li>
     </ul>
     <div
@@ -48,6 +48,7 @@
 
   // 创建BFC处理 carousel-container 和 home-container 外边距合并问题
   overflow: hidden;
+
   ul {
     list-style: none;
     margin: 0;
@@ -98,7 +99,7 @@
       transform: translate(-50%, @jump);
     }
   }
-  
+
   @keyframes jump-down {
     0% {
       transform: translate(-50%, -@jump);
@@ -162,6 +163,16 @@ export default {
   methods: {
     switchTo(i) {
       this.index = i;
+    },
+    handleWheel(e) {
+      // console.log(e.deltaY);
+      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+        // 往下滚动
+        this.index++;
+      } else if (e.deltaY < -5 && this.index >= 1) {
+        // 往下滚动
+        this.index--;
+      }
     },
   },
   computed: {
