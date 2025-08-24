@@ -7,7 +7,7 @@
       }"
     >
       <li v-for="item in banners" :key="item.id">
-        <CarouselItem />
+        <CarouselItem :item="item" />
       </li>
     </ul>
     <div
@@ -45,6 +45,9 @@
   width: 100%;
   height: 100%;
   position: relative;
+
+  // 创建BFC处理 carousel-container 和 home-container 外边距合并问题
+  overflow: hidden;
   ul {
     list-style: none;
     margin: 0;
@@ -64,7 +67,7 @@
 }
 
 .arrow {
-  .self-center(fixed);
+  .self-center();
   font-size: 30px;
   color: @gray;
   cursor: pointer;
@@ -110,7 +113,7 @@
 }
 
 .indicator {
-  .self-center(fixed);
+  .self-center();
   left: auto;
   right: 15px;
   transform: translateY(-50%);
