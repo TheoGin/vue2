@@ -3,8 +3,10 @@ import App from "./App.vue";
 import "@/styles/global.less";
 import router from "@/router";
 import { showMessage } from "@/utils";
-window.showMessage = showMessage;
+import '@/mock';
+
 /* 
+window.showMessage = showMessage;
 // showMessage("abc", "success");
 showMessage({
   content: "abc",

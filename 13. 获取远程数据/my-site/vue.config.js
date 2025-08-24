@@ -1,12 +1,10 @@
-// vue-cli的配置文件
 module.exports = {
   devServer: {
     proxy: {
-      "/api": {
-        target: "http://test.my-site.com",
-      },
-    },
-  },
-  configureWebpack: require("./webpack.config"),
-  
-};
+      '/api': {
+        // 以 api 开头的开发服务器转发到 http://test.mysite.com
+        target: 'http://test.mysite.com'
+      }
+    }
+  }
+}

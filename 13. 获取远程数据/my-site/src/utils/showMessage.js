@@ -18,7 +18,6 @@ import { getComponentRootDom } from "./index.js";
   callback
 ) { */
 export default function showMessage(options = {}) {
-  console.log(options.type);
   // 参数太多 -》换成配置对象
   const content = options.content || "";
   const type = options.type || "info";
@@ -61,7 +60,6 @@ export default function showMessage(options = {}) {
   div.style.opacity = 1;
   div.style.transform = `translate(-50%, -50%)`;
 
-console.log(duration)
   // 等一段时间，消失
   setTimeout(() => {
     div.style.transform = "translate(-50%, -50%) translateY(-25px)";

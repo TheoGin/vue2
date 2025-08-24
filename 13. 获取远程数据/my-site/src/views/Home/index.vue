@@ -1,25 +1,17 @@
 <template>
   <div class="home-container" ref="container">
     <h1>主页</h1>
-    <button @click="handleClick">展示消息</button>
   </div>
 </template>
 
 <script>
+import { getBanners } from '@/api/banner.js'
+getBanners().then(r => {
+    console.log(r)
+})
 export default {
   methods: {
-    handleClick() {
-      this.$showMessage({
-        type: "success",
-        content: "注册成功",
-        container: this.$refs.container,
-        // duration: 1112000,
-        duration: 2000,
-        callback: function() {
-          console.log("完成！！！");
-        },
-      });
-    },
+    
   },
 };
 </script>
