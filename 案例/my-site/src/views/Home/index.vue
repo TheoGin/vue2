@@ -189,6 +189,7 @@ export default {
     },
     handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
+      console.log(this.containerHeight);
     },
   },
 };

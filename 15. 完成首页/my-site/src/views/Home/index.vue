@@ -5,6 +5,7 @@
       :style="{
         marginTop,
       }"
+      @transitionend="handleTransitionend"
     >
       <li v-for="item in banners" :key="item.id">
         <CarouselItem :carousel="item" />
@@ -149,8 +150,9 @@ export default {
   data() {
     return {
       banners: [],
-      index: 0,
-      containerHeight: 0,
+      index: 0, // 当前显示的是第几张轮播图
+      containerHeight: 0, // 整个容器的高度
+      switching: false, // 是否正在切换中
     };
   },
   async created() {
@@ -159,25 +161,44 @@ export default {
   // 真实 DOM 挂载完
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
+    // 像window这种事件，不要用window.onresize，而要用addEventListener，不然可能会把其他resize事件给覆盖掉
+    window.addEventListener("resize", this.handleResize);
+  },
+  // destoryed() {
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     switchTo(i) {
       this.index = i;
     },
     handleWheel(e) {
+      if (this.switching) {
+        // 正在滚轮中，防止一次滚动两张图片
+        return;
+      }
       // console.log(e.deltaY);
       if (e.deltaY > 5 && this.index < this.banners.length - 1) {
         // 往下滚动
+        this.switching = true;
         this.index++;
       } else if (e.deltaY < -5 && this.index >= 1) {
         // 往下滚动
+        this.switching = true;
         this.index--;
       }
+    },
+    handleTransitionend() {
+      this.switching = false;
     },
   },
   computed: {
     marginTop() {
       return -this.index * this.containerHeight + "px";
+    },
+    handleResize() {
+      this.containerHeight = this.$refs.container.clientHeight;
+      console.log(this.containerHeight);
     },
   },
 };

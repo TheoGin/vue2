@@ -2,7 +2,13 @@
   <div class="carousel-item-container">
     <!-- <img :src="item.bigImg" alt=""> -->
     <!-- 有图片组件！！！ -->
-    <ImageLoader :src="carousel.bigImg" :placeholder="carousel.midImg" />
+    <div class="carousel-img">
+      <ImageLoader
+        @load="this.showWords"
+        :src="carousel.bigImg"
+        :placeholder="carousel.midImg"
+      />
+    </div>
 
     <div class="words title" ref="title">
       {{ carousel.title }}
@@ -28,35 +34,44 @@ export default {
   } */
   // 不通用的组件，可以不用写类型，节省代码
   props: ["carousel"],
-  data(){
+  data() {
     return {
-
       titleWidth: 0,
       descWidth: 0,
-    }
+    };
   },
   mounted() {
     this.titleWidth = this.$refs.title.clientWidth;
     this.descWidth = this.$refs.desc.clientWidth;
-    console.log(this.titleWidth,this.descWidth);
-    this.showWords();
+    // this.showWords();
+    // 图片加载事件加载完再显示！！
   },
   methods: {
+    // 调用该方法，显示文字
     showWords() {
       // 标题
       this.$refs.title.style.width = 0;
-      this.$refs.title.style.opacity = 0;
-      this.$refs.title.style.transition = '1s';
-
-      this.$refs.title.clientWidth; // reflow
-      
-      this.$refs.title.style.width = this.titleWidth + 'px';
+      // this.$refs.title.style.opacity = 0;
       this.$refs.title.style.opacity = 1;
-      this.$refs.title.style.transition = '1s';
+      this.$refs.title.style.transition = "1s";
+      // 强制让浏览器渲染一次
+      this.$refs.title.clientWidth; // reflow
+      this.$refs.title.style.width = this.titleWidth + "px";
+      // this.$refs.title.style.opacity = 1;
+      this.$refs.title.style.transition = "1s";
 
       // 描述
-    }
-  }
+      this.$refs.desc.style.width = 0;
+      // this.$refs.title.style.opacity = 0;
+      this.$refs.title.style.opacity = 1;
+      // 强制让浏览器渲染一次
+      this.$refs.desc.clientWidth; // reflow
+      // 过渡两秒；延迟一秒
+      this.$refs.desc.style.transition = "2s 1s";
+      this.$refs.desc.style.width = this.descWidth + "px";
+      // this.$refs.desc.style.opacity = 1;
+    },
+  },
 };
 </script>
 
@@ -68,13 +83,12 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: @dark;
+  // background: @dark;
   color: #fff;
 
-  img {
+  .carousel-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
   }
 }
 
@@ -85,10 +99,14 @@ export default {
   transform: translateY(-50%);
   letter-spacing: 3px;
   // width: 0;
-  transition: 1s;
   // opacity: 0;
   white-space: nowrap;
   overflow: hidden;
+  text-shadow: 1px 0 0 rgba(0, 0, 0, 0.5),
+    -1px 0 0 rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(0, 0, 0, 0.5),
+    0 -1px 0 rgba(0, 0, 0, 0.5),
+    ;
 }
 .title {
   color: #fff;
