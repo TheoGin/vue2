@@ -43,26 +43,32 @@ export default {
     return {
       titleWidth: 0,
       descWidth: 0,
-      outerContainerSize: null,
-      innerImgSize: null,
-      mouseX: 0,
-      mouseY: 0,
-      extraWidth: 0,
-      extraHeight: 0,
+      outerContainerSize: null, // 外层容器的尺寸
+      innerImgSize: null, // 里层图片的尺寸
+      mouseX: 0, // 鼠标在容器中的横坐标
+      mouseY: 0, // 鼠标在容器中的纵坐标
+      // 可以不用响应式
+      /* extraWidth: 0,
+      extraHeight: 0, */
     };
   },
   computed: {
     imgPosition() {
       // 没有挂载完，没有outerContainerSize
-      if (!this.outerContainerSize) {
+      if (!this.outerContainerSize || !this.innerImgSize) {
         return;
       }
 
+      const extraWidth = this.innerImgSize.width - this.outerContainerSize.width;
+      const extraHeight =
+        this.innerImgSize.height - this.outerContainerSize.height;
+      // console.log(this.extraWidth, this.extraHeight);
+      
       // extraWidth = outerContainerSize.width / mouseX * x
       const left =
-        (-this.extraWidth / this.outerContainerSize.width) * this.mouseX;
+        (-extraWidth / this.outerContainerSize.width) * this.mouseX;
       const top =
-        (-this.extraHeight / this.outerContainerSize.height) * this.mouseY;
+        (-extraHeight / this.outerContainerSize.height) * this.mouseY;
       /* return {
         left: left + "px",
         top: top + "px",
@@ -113,7 +119,7 @@ export default {
       // 描述
       this.$refs.desc.style.width = 0;
       // this.$refs.title.style.opacity = 0;
-      this.$refs.title.style.opacity = 1;
+      this.$refs.desc.style.opacity = 1;
       // 强制让浏览器渲染一次
       this.$refs.desc.clientWidth; // reflow
       // 过渡两秒；延迟一秒
@@ -130,11 +136,6 @@ export default {
         width: this.$refs.image.clientWidth,
         height: this.$refs.image.clientHeight,
       };
-
-      this.extraWidth = this.innerImgSize.width - this.outerContainerSize.width;
-      this.extraHeight =
-        this.innerImgSize.height - this.outerContainerSize.height;
-      // console.log(this.extraWidth, this.extraHeight);
     },
     handleMousemove(e) {
       const rect = this.$refs.container.getBoundingClientRect();
@@ -167,7 +168,9 @@ export default {
     position: absolute;
     width: 110%;
     height: 110%;
-    z-index: -1;
+
+    // 测试
+    // z-index: -1;
     transition: 0.3s;
   }
 }
@@ -179,7 +182,9 @@ export default {
   transform: translateY(-50%);
   letter-spacing: 3px;
   // width: 0;
-  // opacity: 0;
+
+  // 一开始不显示
+  opacity: 0;
   white-space: nowrap;
   overflow: hidden;
   text-shadow: 1px 0 0 rgba(0, 0, 0, 0.5), -1px 0 0 rgba(0, 0, 0, 0.5),
