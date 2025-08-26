@@ -50,6 +50,15 @@
   // 创建BFC处理 carousel-container 和 home-container 外边距合并问题
   overflow: hidden;
 
+  // 测试
+  // width: 400px;
+  // height: 300px;
+  /* width: 60%;
+  height: 40%;
+  border: 5px solid;
+  margin: 100px auto;
+  overflow: visible; */
+
   ul {
     list-style: none;
     margin: 0;
@@ -191,14 +200,14 @@ export default {
     handleTransitionend() {
       this.switching = false;
     },
+    handleResize() {
+      this.containerHeight = this.$refs.container.clientHeight;
+      console.log(this.containerHeight);
+    },
   },
   computed: {
     marginTop() {
       return -this.index * this.containerHeight + "px";
-    },
-    handleResize() {
-      this.containerHeight = this.$refs.container.clientHeight;
-      console.log(this.containerHeight);
     },
   },
 };
