@@ -40,7 +40,6 @@
         @click="switchTo(i)"
       ></li>
     </ul>
-    <!-- <Loading v-if="isLoading" /> -->
   </div>
 </template>
 
@@ -156,13 +155,11 @@
 import { getBanners } from "@/api/banner.js";
 import CarouselItem from "./Carouselitem.vue";
 import Icon from "@/components/Icon";
-// import Loading from "@/components/Loading";
 
 export default {
   components: {
     CarouselItem,
     Icon,
-    // Loading
   },
   data() {
     return {
