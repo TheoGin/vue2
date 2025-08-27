@@ -1,5 +1,5 @@
-import loadingSvg from '@/assets/loading.svg';
-import style from './loading.module.less';
+import loadingUrl from "@/assets/loading.svg";
+import style from "./loading.module.less";
 
 /* export default {
   binding() {
@@ -13,28 +13,34 @@ import style from './loading.module.less';
   },
 }; */
 // 如果这两个钩子函数实现的功能相同，可以直接把指令配置简化为一个单独的函数
-export default function(el, binding){
-    // 这会在 `mounted` 和 `updated` 时都调用
-    // console.log(binding); // {name: 'loading', rawName: 'v-loading', value: false, expression: 'isLoading', modifiers: {…}, …}
+export default function(el, binding) {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  // console.log(binding); // {name: 'loading', rawName: 'v-loading', value: false, expression: 'isLoading', modifiers: {…}, …}
 
-    const img =  getImg(el);
-    if(binding.value && !img) {
-        console.log(loadingSvg);
-        
-        el.appendChild(createImg());
-    } else {
-        img.remove();
+  const curImg = getLoadingImage(el);
+  // 根据 binding.value 的值，决定创建或删除img元素
+  if (binding.value) {
+    if (!curImg) {
+      el.appendChild(createLoadingImg());
     }
+  } else {
+    if (curImg) {
+      curImg.remove();
+    }
+  }
 }
 
-function createImg() {
-    const img = document.createElement('img');
-    img.src = loadingSvg;
-    img.className = style.loading;
-    img.dataset.loading='svg';
-    return img;
+function createLoadingImg() {
+  const img = document.createElement("img");
+  img.src = loadingUrl;
+  img.className = style.loading;
+  img.dataset.role = "loading";
+  return img;
 }
 
-function getImg(el) {
-    return el.querySelector('img[loading="svg"]');
+// 得到el中loading效果的img元素
+function getLoadingImage(el) {
+//   return el.querySelector("img[role=loading]");
+// 要加 data-
+  return el.querySelector("img[data-role=loading]");
 }
