@@ -4,6 +4,9 @@ import "@/styles/global.less";
 import router from "@/router";
 import { showMessage } from "@/utils";
 import '@/mock';
+import VLoading from './directives/loading.js';
+
+Vue.directive('loading', VLoading);
 
 /* 
 window.showMessage = showMessage;

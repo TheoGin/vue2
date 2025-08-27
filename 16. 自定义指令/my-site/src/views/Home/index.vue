@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div class="home-container" ref="container" v-loading="isLoading" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
@@ -35,6 +35,7 @@
         @click="switchTo(i)"
       ></li>
     </ul>
+    <!-- <Loading v-if="isLoading" /> -->
   </div>
 </template>
 
@@ -148,13 +149,15 @@
 
 <script>
 import { getBanners } from "@/api/banner.js";
-import CarouselItem from "./CarouselItem.vue";
+import CarouselItem from "./Carouselitem.vue";
 import Icon from "@/components/Icon";
+// import Loading from "@/components/Loading";
 
 export default {
   components: {
     CarouselItem,
     Icon,
+    // Loading
   },
   data() {
     return {
@@ -162,10 +165,12 @@ export default {
       index: 0, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在切换中
+      isLoading: true,
     };
   },
   async created() {
     this.banners = await getBanners();
+    this.isLoading = false;
   },
   // 真实 DOM 挂载完
   mounted() {
@@ -202,7 +207,6 @@ export default {
     },
     handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
-      console.log(this.containerHeight);
     },
   },
   computed: {
