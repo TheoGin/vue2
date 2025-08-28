@@ -1,43 +1,43 @@
 <template>
   <div
-    class="home-container"
-    ref="container"
-    v-loading="isLoading"
-    @wheel="handleWheel"
+      class="home-container"
+      ref="container"
+      v-loading="isLoading"
+      @wheel="handleWheel"
   >
     <ul
-      class="carousel-container"
-      :style="{
+        class="carousel-container"
+        :style="{
         marginTop,
       }"
-      @transitionend="handleTransitionend"
+        @transitionend="handleTransitionend"
     >
-      <li v-for="item in banners" :key="item.id">
-        <CarouselItem :carousel="item" />
+      <li v-for="item in data" :key="item.id">
+        <CarouselItem :carousel="item"/>
       </li>
     </ul>
     <div
-      v-show="index >= 1"
-      class="arrow arrow-up"
-      @click="switchTo(index - 1)"
+        v-show="index >= 1"
+        class="arrow arrow-up"
+        @click="switchTo(index - 1)"
     >
-      <Icon type="arrowUp" />
+      <Icon type="arrowUp"/>
     </div>
     <div
-      v-show="index < banners.length - 1"
-      class="arrow arrow-down"
-      @click="switchTo(index + 1)"
+        v-show="index < data.length - 1"
+        class="arrow arrow-down"
+        @click="switchTo(index + 1)"
     >
-      <Icon type="arrowDown" />
+      <Icon type="arrowDown"/>
     </div>
     <ul class="indicator">
       <li
-        :class="{
+          :class="{
           active: index === i,
         }"
-        v-for="(item, i) in banners"
-        :key="item.id"
-        @click="switchTo(i)"
+          v-for="(item, i) in data"
+          :key="item.id"
+          @click="switchTo(i)"
       ></li>
     </ul>
   </div>
@@ -152,28 +152,30 @@
 </style>
 
 <script>
-import { getBanners } from "@/api/banner.js";
+import {getBanners} from "@/api/banner.js";
 import CarouselItem from "./Carouselitem.vue";
 import Icon from "@/components/Icon";
+import fetchData from '@/mixins/fetchData'
 
 export default {
+  mixins: [fetchData([])],
   components: {
     CarouselItem,
     Icon,
   },
   data() {
     return {
-      banners: [],
+      // data: [],
       index: 0, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在切换中
-      isLoading: true,
+      // isLoading: true,
     };
   },
-  async created() {
-    this.banners = await getBanners();
+  /*async created() {
+    this.data = await getBanners();
     this.isLoading = false;
-  },
+  },*/
   // 真实 DOM 挂载完
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
@@ -185,6 +187,9 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
+    async fetchData() {
+      return await getBanners();
+    },
     switchTo(i) {
       this.index = i;
     },
@@ -194,7 +199,7 @@ export default {
         return;
       }
       // console.log(e.deltaY);
-      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+      if (e.deltaY > 5 && this.index < this.data.length - 1) {
         // 往下滚动
         this.switching = true;
         this.index++;
