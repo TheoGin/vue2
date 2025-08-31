@@ -22,6 +22,11 @@ export default [
     component: Blog,
   },
   {
+    name: "BlogCategory",
+    path: "/article/:categoryId",
+    component: Blog,
+  },
+  {
     name: "Message",
     path: "/message",
     component: Message,

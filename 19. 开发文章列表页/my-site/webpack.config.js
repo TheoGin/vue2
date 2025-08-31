@@ -5,12 +5,12 @@ if (process.env.NODE_ENV === "production") {
   module.exports = {
     // devtool: "none",
     plugins: [new BundleAnalyzerPlugin()],
-    externals: {
-      vue: "Vue",
-      vuex: "Vuex",
-      "vue-router": "VueRouter",
-      axios: "axios",
-    },
+    // externals: {
+    //   vue: "Vue",
+    //   vuex: "Vuex",
+    //   "vue-router": "VueRouter",
+    //   axios: "axios",
+    // },
   };
 } else {
   module.exports = {};
