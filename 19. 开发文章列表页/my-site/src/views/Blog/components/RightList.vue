@@ -5,8 +5,12 @@
       <span :class="{ active: item.isSelect }">
         {{ item.name }}
       </span>
-      <span class="aside" :class="{ active: item.isSelect }" @click="handleClick(item)">
-        {{ item.articleCount + '篇' }}
+      <span
+        class="aside"
+        :class="{ active: item.isSelect }"
+        @click="handleClick(item)"
+      >
+        {{ item.aside }}
       </span>
       <!-- 显示当前组件 -->
       <RightList @select="handleClick" :list="item.children" />
@@ -26,7 +30,7 @@ export default {
   },
   methods: {
     handleClick(item) {
-      if(item.isSelect) {
+      if (item.isSelect) {
         return;
       }
       this.$emit("select", item);
@@ -40,6 +44,7 @@ export default {
 .right-list-container {
   list-style: none;
   padding: 0;
+  margin: 0;
 
   li {
     // height: 40px;

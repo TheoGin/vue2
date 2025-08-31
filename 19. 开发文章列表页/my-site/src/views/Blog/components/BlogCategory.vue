@@ -1,7 +1,8 @@
 <template>
-  <div class="right-list-container" v-loading="isLoading">
+  <div class="blog-category-container" v-loading="isLoading">
+    <h2>文章分类</h2>
     <!-- 直接传递没有全部，需要map -->
-<!--    <RightList :list="data"></RightList>-->
+    <!-- <RightList :list="data"></RightList> -->
     <RightList :list="list" @select="handleSelect"></RightList>
   </div>
 </template>
@@ -17,22 +18,29 @@ export default {
     RightList,
   },
   computed: {
-    categoryId(){
+    categoryId() {
       return +this.$route.params.categoryId || -1;
     },
-    limit(){
+    limit() {
       return +this.$route.query.limit || 10;
     },
     list() {
-      const totalArticleCount = this.data.reduce((acc, item) => acc + item.articleCount, 0)
-      const result = [{id: -1, name: '全部', articleCount: totalArticleCount}, ...this.data];
-      return result.map(item => {
+      const totalArticleCount = this.data.reduce(
+        (acc, item) => acc + item.articleCount,
+        0
+      );
+      const result = [
+        { id: -1, name: "全部", articleCount: totalArticleCount },
+        ...this.data,
+      ];
+      return result.map((item) => {
         return {
           ...item,
-          isSelect: item.id === this.categoryId
-        }
-      })
-    }
+          isSelect: item.id === this.categoryId,
+          aside: `${item.articleCount}篇`
+        };
+      });
+    },
   },
   methods: {
     async fetchData() {
@@ -43,7 +51,7 @@ export default {
         page: 1,
         limit: this.limit,
       };
-      // 两种情况
+      // 跳转到 当前的分类id  当前的页容量  newPage的页码
       if (item.id !== -1) {
         // 1、http://localhost:8080/article/2?page=2&limit=20
         this.$router.push({
@@ -60,15 +68,28 @@ export default {
           query,
         });
       }
-    }
+    },
   },
 };
 </script>
 
 <style scoped lang="less">
-.right-list-container {
+@import "~@/styles/var.less";
+
+.blog-category-container {
   position: relative;
+  width: 300px;
+  box-sizing: border-box;
   height: 100%;
   overflow-y: auto;
+  padding: 20px;
+
+  h2 {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
 }
 </style>
