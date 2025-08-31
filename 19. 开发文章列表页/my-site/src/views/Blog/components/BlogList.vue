@@ -1,6 +1,6 @@
 <template>
   <div class="blog-list-container" ref="container" v-loading="isLoading">
-    <ul v-if="">
+    <ul>
       <li v-for="item in data.rows" :key="item.id">
         <div v-if="item.thumb" class="thumb">
           <a href="">
@@ -132,6 +132,9 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  // 避免滚动太仓促
+  scroll-behavior: smooth;
+  
 
   ul {
     list-style: none;

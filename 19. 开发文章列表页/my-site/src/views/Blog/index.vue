@@ -1,15 +1,9 @@
 <template>
   <div class="blog-container">
     <Layout>
-      <template #default>
-        <div class="main">
-          <Blog />
-        </div>
-      </template>
+      <BlogList />
       <template #right>
-        <div class="right">
-          <BlogCategory />
-        </div>
+        <BlogCategory />
       </template>
     </Layout>
   </div>
@@ -23,18 +17,14 @@ import BlogCategory from "@/views/Blog/components/BlogCategory.vue";
 export default {
   components: {
     Layout,
-    Blog: BlogList,
+    BlogList,
     BlogCategory,
   }
 }
 </script>
 
 <style scoped lang="less">
-.main {
-  height: 100vh;
-}
-.right {
-  width: 300px;
-  height: 100vh;
+.blog-container {
+  height: 100%;
 }
 </style>
