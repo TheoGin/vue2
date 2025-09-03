@@ -44,7 +44,6 @@ export default {
 .right-list-container {
   list-style: none;
   padding: 0;
-  margin: 0;
 
   li {
     // height: 40px;

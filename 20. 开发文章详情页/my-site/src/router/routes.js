@@ -3,6 +3,7 @@ import About from "@/views/About";
 import Blog from "@/views/Blog";
 import Message from "@/views/Message";
 import Project from "@/views/Project";
+import Detail from "@/views/Blog/Detail.vue";
 
 export default [
   {
@@ -22,8 +23,13 @@ export default [
     component: Blog,
   },
   {
+      name: "BlogDetail",
+      path: "/article/:id",
+      component: Detail,
+  },
+  {
     name: "BlogCategory",
-    path: "/article/:categoryId",
+    path: "/article/cate/:categoryId",
     component: Blog,
   },
   {
