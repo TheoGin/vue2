@@ -5,7 +5,6 @@ import router from "@/router";
 import { showMessage } from "@/utils";
 import '@/mock';
 import VLoading from './directives/loading.js';
-import '@/api/blog'
 
 Vue.directive('loading', VLoading);
 
