@@ -3,6 +3,8 @@
     <form class="left">
       <div class="form-item">
         <label>账号</label>
+        <!-- <input type="text" :value="formData.loginId" @input="formData.loginId = $event.target.value" /> -->
+         <!-- trim去掉空格 -->
         <input type="text" v-model.trim="formData.loginId" />
       </div>
       <div class="form-item">
@@ -35,20 +37,23 @@
       <div class="form-item">
         性别：
         <label>
-          <input type="radio" v-model="formData.sex" value="male" />
+          <!-- 不需要name属性 -->
+          <input type="radio" value="male" v-model="formData.sex" />
           男
         </label>
         <label>
-          <input type="radio" v-model="formData.sex" value="female" />
+          <input type="radio" value="female" v-model="formData.sex" />
           女
         </label>
       </div>
       <div class="form-item">
         <label>年龄</label>
-        <input type="number" v-model.number="formData.age" />
+        <!-- .number：修饰符会自动将字符串转换为数字类型。如果没有 .number 修饰符，即使输入的是数字，v-model 也会将其绑定为字符串类型。 -->
+        <input v-model.number="formData.age" type="number" />
       </div>
       <div class="form-item">
         <label>个人简介</label>
+        <!-- lazy：失去焦点后再更新 -->
         <textarea v-model.lazy="formData.introduce"></textarea>
       </div>
       <div class="form-item">
@@ -104,16 +109,19 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 .left,
 .right {
   width: 50%;
   box-sizing: border-box;
   padding: 25px;
 }
+
 .right {
   border-left: 1px solid #ccc;
   font-size: 16px;
 }
+
 .form-item {
   margin-bottom: 15px;
 
