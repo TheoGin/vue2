@@ -4,9 +4,9 @@
       <div class="form-item">
         <div class="input-area">
           <input
-              type="text"
-              placeholder="用户昵称"
-              v-model="formData.nickname"
+            type="text"
+            placeholder="用户昵称"
+            v-model="formData.nickname"
           />
           <div class="tip">0/10</div>
         </div>
@@ -15,10 +15,10 @@
       <div class="form-item">
         <div class="input-area">
           <textarea
-              name=""
-              id=""
-              placeholder="输入内容"
-              v-model="formData.content"
+            name=""
+            id=""
+            placeholder="输入内容"
+            v-model="formData.content"
           ></textarea>
           <div class="tip">0/300</div>
         </div>
@@ -57,18 +57,16 @@ export default {
       }
       this.isSubmiting = true;
       this.$emit("submit", this.formData, (msg) => {
-
         this.$showMessage({
-          type: 'success',
+          type: "success",
           content: msg,
           container: this.$refs.form,
           callback: () => {
             this.formData.nickname = "";
             this.formData.content = "";
             this.isSubmiting = false;
-          }
-        })
-
+          },
+        });
       });
     },
   },

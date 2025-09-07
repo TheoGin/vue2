@@ -1,23 +1,28 @@
 <template>
-  <MessageArea :title="title" :isLoading="isLoading" :data="data" @submit="handleSubmit" />
+  <MessageArea
+    :title="title"
+    :isLoading="isLoading"
+    :data="data"
+    @submit="handleSubmit"
+  />
 </template>
 
 <script>
 import MessageArea from "@/components/MessageArea/index.vue";
 import fetchData from "@/mixins/fetchData";
-import {getComments, postComment} from "@/api/blog";
+import { getComments, postComment } from "@/api/blog";
 
 export default {
   mixins: [fetchData({ total: 0, rows: [] })],
   components: {
     MessageArea,
   },
-  data(){
+  data() {
     return {
-      title: '评论列表',
+      title: "评论列表",
       page: 1,
       limit: 10,
-    }
+    };
   },
   methods: {
     async fetchData() {
@@ -30,7 +35,7 @@ export default {
       });
       this.data.total++;
       this.data.rows.unshift(resp);
-      callback('评论成功');
+      callback("评论成功");
     },
   },
 };
