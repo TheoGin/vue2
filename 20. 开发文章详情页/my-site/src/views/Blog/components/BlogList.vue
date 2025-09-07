@@ -3,28 +3,45 @@
     <ul>
       <li v-for="item in data.rows" :key="item.id">
         <div v-if="item.thumb" class="thumb">
-          <a href="">
-            <img :src="item.thumb" :alt="item.title" :title="item.title"/>
-          </a>
+          <router-link
+            :to="{
+              name: 'BlogDetail',
+              params: {
+                id: item.id,
+              },
+            }"
+          >
+            <img :src="item.thumb" :alt="item.title" :title="item.title" />
+          </router-link>
         </div>
         <div class="main">
-          <a href="">
+          <router-link
+            :to="{
+              name: 'BlogDetail',
+              params: {
+                id: item.id,
+              },
+            }"
+          >
             <h2>{{ item.title }}</h2>
-          </a>
+          </router-link>
           <div class="aside">
             <span>日期：{{ dateFormat(item.createDate) }}</span>
             <span>浏览：{{ item.scanNumber }}</span>
             <span>评论{{ item.commentNumber }}</span>
-            <router-link :to="{
-            name: 'BlogCategory',
-            query: {
-              page: routeInfo.page,
-              limit: routeInfo.limit,
-            },
-            params: {
-              categoryId: item.category.id,
-            },
-            }" class="">{{ item.category.name }}
+            <router-link
+              :to="{
+                name: 'BlogCategory',
+                query: {
+                  page: routeInfo.page,
+                  limit: routeInfo.limit,
+                },
+                params: {
+                  categoryId: item.category.id,
+                },
+              }"
+              class=""
+              >{{ item.category.name }}
             </router-link>
           </div>
           <div class="desc">
@@ -35,21 +52,21 @@
     </ul>
     <!-- 分页放到这里 -->
     <Pager
-        v-if="data.total"
-        :total="data.total"
-        :current="routeInfo.page"
-        :limit="routeInfo.limit"
-        :visible-number="10"
-        @pageChange="handlePageChange"
+      v-if="data.total"
+      :total="data.total"
+      :current="routeInfo.page"
+      :limit="routeInfo.limit"
+      :visible-number="10"
+      @pageChange="handlePageChange"
     />
   </div>
 </template>
 
 <script>
-import {getBlogs} from "@/api/blog";
+import { getBlogs } from "@/api/blog";
 import Pager from "@/components/Pager/index.vue";
 import fetchData from "@/mixins/fetchData";
-import {dateFormat} from "@/utils";
+import { dateFormat } from "@/utils";
 
 export default {
   mixins: [fetchData({})],
@@ -72,9 +89,9 @@ export default {
     dateFormat, // 要在模版中用，要写在 methods 中
     async fetchData() {
       return await getBlogs(
-          this.routeInfo.page,
-          this.routeInfo.limit,
-          this.routeInfo.categoryId
+        this.routeInfo.page,
+        this.routeInfo.limit,
+        this.routeInfo.categoryId
       );
     },
     async handlePageChange(newPageNum) {
@@ -102,7 +119,7 @@ export default {
     },
   },
   watch: {
-     async $route() {
+    async $route() {
       this.$refs.container.scrollTop = 0;
 
       this.isLoading = true;
@@ -116,9 +133,8 @@ export default {
       immediated: true,
       deep: true
     },*/
-  }
-}
-;
+  },
+};
 </script>
 
 <style scoped lang="less">
@@ -134,7 +150,6 @@ export default {
   box-sizing: border-box;
   // 避免滚动太仓促
   scroll-behavior: smooth;
-  
 
   ul {
     list-style: none;

@@ -4,7 +4,7 @@
     <aside class="aside">
       <span>日期：{{ dateFormat(blog.createDate) }}</span>
       <span>浏览：{{ blog.scanNumber }}</span>
-      <a href="">评论：{{ blog.commentNumber }}</a>
+      <a href="#data-form-container">评论：{{ blog.commentNumber }}</a>
       <!-- <a href="">分类：{{ blog.category.id }}</a> -->
       <a href="">{{ blog.category.name }}</a>
     </aside>

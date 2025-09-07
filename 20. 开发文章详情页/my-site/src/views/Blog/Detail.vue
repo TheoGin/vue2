@@ -2,11 +2,14 @@
   <div class="detail-container">
     <Layout>
       <div class="main-container" v-loading="isLoading">
-        <BlogDetail v-if="data" :blog="data" />
+        <BlogDetail v-if="data" :blog="data"/>
+
+        <!-- 加载完BlogDetail在加载MessageArea -->
+        <BlogComment v-if="!isLoading"/>
       </div>
       <template #right>
         <div class="right-container" v-loading="isLoading">
-          <BlogTOC v-if="data" :toc="data.toc" />
+          <BlogTOC v-if="data" :toc="data.toc"/>
         </div>
       </template>
     </Layout>
@@ -14,15 +17,17 @@
 </template>
 
 <script>
-import Layout from '@/components/Layout/index.vue';
+import Layout from "@/components/Layout/index.vue";
 import BlogTOC from "@/views/Blog/components/BlogTOC.vue";
 import fetchData from "@/mixins/fetchData";
-import {getBlog} from "@/api/blog";
+import {getBlog, postComment} from "@/api/blog";
 import BlogDetail from "@/views/Blog/components/BlogDetail.vue";
+import BlogComment from "@/views/Blog/components/BlogComment.vue";
 
 export default {
   mixins: [fetchData(null)],
   components: {
+    BlogComment,
     Layout,
     BlogDetail,
     BlogTOC,
@@ -30,9 +35,9 @@ export default {
   methods: {
     async fetchData() {
       return await getBlog(this.$route.params.id);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -47,6 +52,7 @@ export default {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
 .right-container {
   width: 300px;
   box-sizing: border-box;
