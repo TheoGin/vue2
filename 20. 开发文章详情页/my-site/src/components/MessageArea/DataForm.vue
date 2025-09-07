@@ -6,9 +6,10 @@
           <input
             type="text"
             placeholder="用户昵称"
+            maxlength="10"
             v-model="formData.nickname"
           />
-          <div class="tip">0/10</div>
+          <div class="tip">{{ formData.nickname.length }}/10</div>
         </div>
         <div class="error">{{ error.nickname }}</div>
       </div>
@@ -18,9 +19,10 @@
             name=""
             id=""
             placeholder="输入内容"
+            maxlength="300"
             v-model="formData.content"
           ></textarea>
-          <div class="tip">0/300</div>
+          <div class="tip">{{ formData.content.length }}/300</div>
         </div>
         <div class="error">{{ error.content }}</div>
       </div>
