@@ -1,8 +1,9 @@
 <template>
   <MessageArea
     :title="title"
+    :subTitle="data.total + ''"
     :isLoading="isLoading"
-    :data="data"
+    :list="data.rows"
     @submit="handleSubmit"
   />
 </template>

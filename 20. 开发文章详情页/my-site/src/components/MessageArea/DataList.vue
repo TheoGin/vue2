@@ -1,51 +1,38 @@
 <template>
-  <div class="data-list-container">
-    <h3 class="title">
-      {{ title }}
-      <span>
-        ({{ data.total }})
-      </span>
-    </h3>
-    <ul>
-      <li v-for="item in data.rows" :key="item.id">
-        <Avatar
-          :url="item.avatar"
-          :size="44"
-        />
-        <div class="content">
-          <div class="name">
-            {{ item.nickname }}
-          </div>
-          <div class="info">
-            {{ item.content }}
-          </div>
+  <ul class="data-list-container">
+    <li v-for="item in list" :key="item.id">
+      <Avatar :url="item.avatar" :size="44" />
+      <div class="content">
+        <div class="name">
+          {{ item.nickname }}
         </div>
-        <div class="time">
-          {{ dateFormat(item.createDate, true) }}
+        <div class="info">
+          {{ item.content }}
         </div>
-      </li>
-    </ul>
-  </div>
+      </div>
+      <div class="time">
+        {{ dateFormat(item.createDate, true) }}
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>
 import Avatar from "@/components/Avatar/index.vue";
-import {dateFormat} from "@/utils";
+import { dateFormat } from "@/utils";
 
 export default {
-  methods: {dateFormat},
   components: {
     Avatar,
   },
   props: {
-    data: {
-      type: Object,
-      default: () => ({})
+    list: {
+      type: Array,
+      default: () => [],
     },
-    title: {
-      type: String,
-      default: ''
-    },
+  },
+  methods: {
+    dateFormat,
   },
 };
 </script>

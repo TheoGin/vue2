@@ -8,8 +8,12 @@
     <!-- <DataForm v-on="{submit: handleSubmit}" /> -->
 
     <!-- 而子组件 this.$listeners // { event1: handleEvent1, event2: handleEvent2 } -->
-    <DataForm v-on="$listeners"/>
-    <DataList :title="title" :data="data" />
+    <DataForm v-on="$listeners" />
+    <h3>
+      {{ title }}
+      <span> ({{ subTitle }}) </span>
+    </h3>
+    <DataList :title="title" :list="list" />
     <div class="loading" v-loading="isLoading"></div>
   </div>
 </template>
@@ -20,18 +24,22 @@ import DataList from "@/components/MessageArea/DataList.vue";
 import Icon from "@/components/Icon/index.vue";
 
 export default {
-  props:{
+  props: {
     isLoading: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    data: {
-      type: Object,
-      default: () => ({})
+    list: {
+      type: Array,
+      default: () => [],
     },
     title: {
       type: String,
-      default: ''
+      default: "",
+    },
+    subTitle: {
+      type: String,
+      default: "",
     },
   },
   components: {
@@ -50,6 +58,7 @@ export default {
 <style scoped lang="less">
 .loading {
   position: relative;
-  margin-top: 50px;
+  // margin-top: 50px;
+  height: 100px;
 }
 </style>

@@ -1,38 +1,34 @@
 <template>
-  <div class="data-form-container">
-    <form ref="form" action="" @submit.prevent="handleSubmit">
-      <div class="form-item">
-        <div class="input-area">
-          <input
-            type="text"
-            placeholder="用户昵称"
-            maxlength="10"
-            v-model="formData.nickname"
-          />
-          <div class="tip">{{ formData.nickname.length }}/10</div>
-        </div>
-        <div class="error">{{ error.nickname }}</div>
+  <form ref="form" @submit.prevent="handleSubmit" class="data-form-container">
+    <div class="form-item">
+      <div class="input-area">
+        <input
+          type="text"
+          placeholder="用户昵称"
+          maxlength="10"
+          v-model="formData.nickname"
+        />
+        <div class="tip">{{ formData.nickname.length }}/10</div>
       </div>
-      <div class="form-item">
-        <div class="input-area">
-          <textarea
-            name=""
-            id=""
-            placeholder="输入内容"
-            maxlength="300"
-            v-model="formData.content"
-          ></textarea>
-          <div class="tip">{{ formData.content.length }}/300</div>
-        </div>
-        <div class="error">{{ error.content }}</div>
+      <div class="error">{{ error.nickname }}</div>
+    </div>
+    <div class="form-item">
+      <div class="input-area">
+        <textarea
+          placeholder="输入内容"
+          maxlength="300"
+          v-model="formData.content"
+        ></textarea>
+        <div class="tip">{{ formData.content.length }}/300</div>
       </div>
-      <div class="form-item">
-        <button :disabled="isSubmiting">
-          {{ isSubmiting ? "提交中..." : "提交" }}
-        </button>
-      </div>
-    </form>
-  </div>
+      <div class="error">{{ error.content }}</div>
+    </div>
+    <div class="form-item">
+      <button :disabled="isSubmiting">
+        {{ isSubmiting ? "提交中..." : "提交" }}
+      </button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -55,13 +51,15 @@ export default {
       this.error.nickname = this.formData.nickname ? "" : "请填写昵称";
       this.error.content = this.formData.content ? "" : "请填写内容";
       if (this.error.nickname || this.error.content) {
+        // 有错误
         return;
       }
-      this.isSubmiting = true;
-      this.$emit("submit", this.formData, (msg) => {
+      this.isSubmiting = true; // 正在提交，防止重复点击
+      this.$emit("submit", this.formData, (successMsg) => {
         this.$showMessage({
           type: "success",
-          content: msg,
+          duration: 1000,
+          content: successMsg,
           container: this.$refs.form,
           callback: () => {
             this.formData.nickname = "";
@@ -69,7 +67,7 @@ export default {
             this.isSubmiting = false;
           },
         });
-      });
+      }); // 让父组件来处理事件
     },
   },
 };
@@ -108,6 +106,7 @@ export default {
     border: 1px dashed @gray;
     box-sizing: border-box;
     border-radius: 5px;
+    color: @words;
   }
 
   input:focus,
