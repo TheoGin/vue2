@@ -1,6 +1,7 @@
 <template>
   <div class="detail-container">
     <Layout>
+      <!-- <div ref="divContainer" class="main-container" v-loading="isLoading"> -->
       <div class="main-container" v-loading="isLoading">
         <BlogDetail v-if="data" :blog="data" />
 
@@ -32,6 +33,16 @@ export default {
     BlogDetail,
     BlogTOC,
   },
+  /* created() {
+    window.addEventListener("scroll", () => {
+      this.scrollTop = this.$refs.divContainer.scrollTop;
+    });
+  },
+  data() {
+    return {
+      scrollTop: 0,
+    };
+  }, */
   methods: {
     async fetchData() {
       return await getBlog(this.$route.params.id);
