@@ -1,8 +1,8 @@
 <template>
   <div class="detail-container">
     <Layout>
-      <!-- <div ref="divContainer" class="main-container" v-loading="isLoading"> -->
-      <div class="main-container" v-loading="isLoading">
+      <!-- <div ref="mainContainer" class="main-container" v-loading="isLoading"> -->
+      <div ref="mainContainer" class="main-container" v-loading="isLoading">
         <BlogDetail v-if="data" :blog="data" />
 
         <!-- 加载完BlogDetail在加载MessageArea -->
@@ -10,7 +10,7 @@
       </div>
       <template #right>
         <div class="right-container" v-loading="isLoading">
-          <BlogTOC v-if="data" :toc="data.toc" />
+          <BlogTOC ref="tocContainer" v-if="data" :toc="data.toc" />
         </div>
       </template>
     </Layout>
@@ -24,6 +24,7 @@ import fetchData from "@/mixins/fetchData";
 import { getBlog, postComment } from "@/api/blog";
 import BlogDetail from "@/views/Blog/components/BlogDetail.vue";
 import BlogComment from "@/views/Blog/components/BlogComment.vue";
+import { debounce } from "@/utils";
 
 export default {
   mixins: [fetchData(null)],
@@ -43,9 +44,30 @@ export default {
       scrollTop: 0,
     };
   }, */
+  mounted() {
+    this.debounceFn = debounce(this.handleScroll, 50);
+    this.$refs.mainContainer.addEventListener("scroll", this.debounceFn);
+
+    // 直接在地址栏输入的时候，没有调到锚点 http://localhost:8081/article/edA7A5Ca-31CA-cc05-fAaC-8dd3BBEABd7C#article-md-title-2
+    // 因为是先
+    const hash = location.hash;
+    location.hash = '';
+    if(hash) {
+      location.hash = hash;
+    }
+  },
+  destroyed() {
+    this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
+  },
   methods: {
     async fetchData() {
       return await getBlog(this.$route.params.id);
+    },
+    handleScroll() {
+      /* this.$refs.tocContainer.setActiveAnchor();
+      console.log(this.$refs.tocContainer) */
+
+      this.$bus.$emit("mainScroll");
     },
   },
 };

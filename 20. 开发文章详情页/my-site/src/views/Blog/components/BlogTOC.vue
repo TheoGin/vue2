@@ -1,7 +1,7 @@
 <template>
   <div class="blog-toc-container">
     <h2>目录</h2>
-    <RightList :list="list" @select="handleSelect" />
+    <RightList :list="tocWithSelect" @select="handleSelect" />
   </div>
 </template>
 
@@ -22,11 +22,13 @@ export default {
     };
   },
   computed: {
-    list() {
-      const getToc = (toc) => {
-        if (!toc) {
+    tocWithSelect() {
+    // 根据toc属性以及activeAnchor得到带有isSelect属性的toc数组
+      // const getToc = (toc) => {
+      const getToc = (toc = []) => {
+        /* if (!toc) {
           return;
-        }
+        } */
         return toc.map((item) => {
           return {
             ...item,
@@ -39,11 +41,11 @@ export default {
     },
     doms() {
       const doms = [];
-      const getDoms = (toc) => {
+      const addToDoms = (toc) => {
         for (const t of toc) {
           doms.push(document.getElementById(t.anchor));
           if (t.children && t.children.length) {
-            getDoms(t.children);
+            addToDoms(t.children);
           }
         }
       };
@@ -53,6 +55,10 @@ export default {
   },
   created() {
     window.setActiveAnchor = this.setActiveAnchor;
+    this.$bus.$on('mainScroll', this.setActiveAnchor);
+  },
+  destroyed() {
+    this.$bus.$off('mainScroll');
   },
   methods: {
     handleSelect(item) {
@@ -68,7 +74,7 @@ export default {
         }
         const top = dom.getBoundingClientRect().top;
         if (top >= 0 && top <= range) {
-          // 在0 - 200范围内
+          // 在0 - 200范围内 激活锚点
           this.activeAnchor = dom.id;
           return;
         } else if (top > range) {

@@ -43,5 +43,7 @@
 
 import Vue from 'vue';
 
-export default new Vue({});
+Vue.prototype.$bus = new Vue({});
+
+// export default new Vue({});
 
