@@ -24,7 +24,6 @@ import fetchData from "@/mixins/fetchData";
 import { getBlog, postComment } from "@/api/blog";
 import BlogDetail from "@/views/Blog/components/BlogDetail.vue";
 import BlogComment from "@/views/Blog/components/BlogComment.vue";
-import { debounce } from "@/utils";
 
 export default {
   mixins: [fetchData(null)],
@@ -33,6 +32,17 @@ export default {
     Layout,
     BlogDetail,
     BlogTOC,
+  },
+  methods: {
+    async fetchData() {
+      return await getBlog(this.$route.params.id);
+    },
+    handleScroll() {
+      /* this.$refs.tocContainer.setActiveAnchor();
+      console.log(this.$refs.tocContainer) */
+      console.log(123)
+      this.$bus.$emit("mainScroll");
+    },
   },
   /* created() {
     window.addEventListener("scroll", () => {
@@ -45,30 +55,25 @@ export default {
     };
   }, */
   mounted() {
-    this.debounceFn = debounce(this.handleScroll, 50);
-    this.$refs.mainContainer.addEventListener("scroll", this.debounceFn);
-
+    /* this.debounceFn = debounce(this.handleScroll, 50);
+    this.$refs.mainContainer.addEventListener("scroll", this.debounceFn); */
+    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    // this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
+    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+  },
+  updated() {
     // 直接在地址栏输入的时候，没有调到锚点 http://localhost:8081/article/edA7A5Ca-31CA-cc05-fAaC-8dd3BBEABd7C#article-md-title-2
     // 因为是先
     const hash = location.hash;
-    location.hash = '';
-    if(hash) {
+    location.hash = "";
+    /* if (hash) {
       location.hash = hash;
-    }
-  },
-  destroyed() {
-    this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
-  },
-  methods: {
-    async fetchData() {
-      return await getBlog(this.$route.params.id);
-    },
-    handleScroll() {
-      /* this.$refs.tocContainer.setActiveAnchor();
-      console.log(this.$refs.tocContainer) */
-
-      this.$bus.$emit("mainScroll");
-    },
+    } */
+   setTimeout(() => {
+    location.hash = hash;
+   }, 50);
   },
 };
 </script>

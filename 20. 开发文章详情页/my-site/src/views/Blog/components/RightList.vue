@@ -1,8 +1,8 @@
 <template>
   <ul class="right-list-container">
-    <li v-for="(item, index) in list" :key="index" @click="handleClick(item)">
+    <li v-for="(item, index) in list" :key="index">
       <!--  用一个元素包起来，不然其子项会全部 active    -->
-      <span :class="{ active: item.isSelect }">
+      <span :class="{ active: item.isSelect }" @click="handleClick(item)">
         {{ item.name }}
       </span>
       <span
