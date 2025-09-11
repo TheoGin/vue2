@@ -40,8 +40,7 @@ export default {
     handleScroll() {
       /* this.$refs.tocContainer.setActiveAnchor();
       console.log(this.$refs.tocContainer) */
-      console.log(123)
-      this.$bus.$emit("mainScroll");
+      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
     },
   },
   /* created() {

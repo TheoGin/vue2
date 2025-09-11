@@ -310,7 +310,8 @@ Mock.mock(/\/api\/comment(\?.+)?/, "get", function(options) {
     code: 0,
     msg: "",
     data: {
-      "total|50-200": 0,
+      // "total|50-200": 0,
+      "total": 52, // 方便测试加载更多
       [`rows|${parsedUrlQuery.limit || 10}`]: [
         {
           id: "@guid",

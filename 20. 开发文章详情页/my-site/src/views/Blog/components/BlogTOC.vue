@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     handleSelect(item) {
-      console.log('item', item)
       location.hash = item.anchor;
     },
     // 设置activeAnchor为正确的值
