@@ -24,9 +24,10 @@ import fetchData from "@/mixins/fetchData";
 import { getBlog, postComment } from "@/api/blog";
 import BlogDetail from "@/views/Blog/components/BlogDetail.vue";
 import BlogComment from "@/views/Blog/components/BlogComment.vue";
+import mainScroll from "@/mixins/mainScroll";
 
 export default {
-  mixins: [fetchData(null)],
+  mixins: [fetchData(null), mainScroll('mainContainer')],
   components: {
     BlogComment,
     Layout,
@@ -37,14 +38,14 @@ export default {
     async fetchData() {
       return await getBlog(this.$route.params.id);
     },
-    handleScroll() {
-      /* this.$refs.tocContainer.setActiveAnchor();
-      console.log(this.$refs.tocContainer) */
+    /*handleScroll() {
+      /!* this.$refs.tocContainer.setActiveAnchor();
+      console.log(this.$refs.tocContainer) *!/
       this.$bus.$emit("mainScroll", this.$refs.mainContainer);
     },
     handleSetMainScroll(scrollTop) {
       this.$refs.mainContainer.scrollTop = scrollTop;
-    },
+    },*/
   },
   /* created() {
     window.addEventListener("scroll", () => {
@@ -56,17 +57,12 @@ export default {
       scrollTop: 0,
     };
   }, */
-  mounted() {
-    /* this.debounceFn = debounce(this.handleScroll, 50);
-    this.$refs.mainContainer.addEventListener("scroll", this.debounceFn); */
+  /*mounted() {
     this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
 
     this.$bus.$on("setMainScroll", this.handleSetMainScroll);
   },
-  beforeDestroy() {
-
-    // [Vue warn]: Error in beforeDestroy hook: "TypeError: this.$bus.off is not a function"
-
+  beforeDestro
     // 可以才销毁元素时，不一直显示ToTop组件
     // this.$bus.$emit("mainScroll", undefined);
     // 不传就是undefined
@@ -76,7 +72,7 @@ export default {
     this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
 
     this.$bus.$off("setMainScroll", this.handleSetMainScroll);
-  },
+  },*/
   updated() {
     // 直接在地址栏输入的时候，没有调到锚点 http://localhost:8081/article/edA7A5Ca-31CA-cc05-fAaC-8dd3BBEABd7C#article-md-title-2
     // 因为是先
