@@ -65,9 +65,10 @@ export default {
       location.hash = item.anchor;
     },
     // 设置activeAnchor为正确的值
-    setActiveAnchor() {
+    setActiveAnchor(scrollDom) {
       // ??
-      if (!this.doms) {
+      // if (!this.doms) {
+      if (!scrollDom) {
         return;
       }
       const range = 200;

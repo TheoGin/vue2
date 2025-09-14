@@ -136,6 +136,7 @@ export default {
   },
   watch: {
     async $route() {
+      // 滚动高度为0
       this.$refs.container.scrollTop = 0;
 
       this.isLoading = true;

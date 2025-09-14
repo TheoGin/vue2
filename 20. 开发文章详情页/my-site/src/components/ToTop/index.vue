@@ -11,30 +11,30 @@ export default {
       isShow: false,
     };
   },
-  mounted() {
+  created() {
     this.$bus.$on("mainScroll", this.handleScroll);
   },
-  beforeDestroy() {
-    // TypeError: this.$bus.off is not a function
+  destroyed() {
     this.$bus.$off("mainScroll", this.handleScroll);
   },
   methods: {
     handleScroll(domMainContainer) {
       if (!domMainContainer) {
         this.isShow = false;
-        console.log("this.isShow", this.isShow);
         return;
       }
       const range = 500;
-      if (domMainContainer.scrollTop > range) {
+      /* if (domMainContainer.scrollTop >= range) {
         this.isShow = true;
       } else {
         this.isShow = false;
-      }
+      } */
+      //  简化代码
+      this.isShow = domMainContainer.scrollTop >= range;
     },
     handleClick() {
       // 传一个domMainContainer过来，然后直接更改domMainContainer的scrollTop属性，但是不太好，会导致数据更改混乱 ——》用事件总线
-      this.$bus.$emit("setMainScroll", 0);
+      this.$bus.$emit("setMainScroll", 0); // 回到顶部
     },
   },
 };
@@ -53,9 +53,8 @@ export default {
   z-index: 99;
   border-radius: 50%;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  line-height: 50px;
+  text-align: center;
   cursor: pointer;
 }
 </style>

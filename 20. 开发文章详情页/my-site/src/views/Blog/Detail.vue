@@ -64,15 +64,16 @@ export default {
     this.$bus.$on("setMainScroll", this.handleSetMainScroll);
   },
   beforeDestroy() {
-    // [Vue warn]: Error in beforeDestroy hook: "TypeError: this.$bus.off is not a function"
 
-    // this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
-    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+    // [Vue warn]: Error in beforeDestroy hook: "TypeError: this.$bus.off is not a function"
 
     // 可以才销毁元素时，不一直显示ToTop组件
     // this.$bus.$emit("mainScroll", undefined);
     // 不传就是undefined
     this.$bus.$emit("mainScroll");
+    
+    // this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
+    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
 
     this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
@@ -107,7 +108,7 @@ export default {
 .right-container {
   width: 300px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
   height: 100%;
   position: relative;
   padding: 20px;
