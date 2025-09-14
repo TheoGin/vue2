@@ -42,6 +42,9 @@ export default {
       console.log(this.$refs.tocContainer) */
       this.$bus.$emit("mainScroll", this.$refs.mainContainer);
     },
+    handleSetMainScroll(scrollTop) {
+      this.$refs.mainContainer.scrollTop = scrollTop;
+    },
   },
   /* created() {
     window.addEventListener("scroll", () => {
@@ -57,10 +60,21 @@ export default {
     /* this.debounceFn = debounce(this.handleScroll, 50);
     this.$refs.mainContainer.addEventListener("scroll", this.debounceFn); */
     this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
+
+    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
   },
-  destroyed() {
+  beforeDestroy() {
+    // [Vue warn]: Error in beforeDestroy hook: "TypeError: this.$bus.off is not a function"
+
     // this.$refs.mainContainer.removeEventListener("scroll", this.debounceFn);
     this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+
+    // 可以才销毁元素时，不一直显示ToTop组件
+    // this.$bus.$emit("mainScroll", undefined);
+    // 不传就是undefined
+    this.$bus.$emit("mainScroll");
+
+    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
   updated() {
     // 直接在地址栏输入的时候，没有调到锚点 http://localhost:8081/article/edA7A5Ca-31CA-cc05-fAaC-8dd3BBEABd7C#article-md-title-2
@@ -70,9 +84,9 @@ export default {
     /* if (hash) {
       location.hash = hash;
     } */
-   setTimeout(() => {
-    location.hash = hash;
-   }, 50);
+    setTimeout(() => {
+      location.hash = hash;
+    }, 50);
   },
 };
 </script>

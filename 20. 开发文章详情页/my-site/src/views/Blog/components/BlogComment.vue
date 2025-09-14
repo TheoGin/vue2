@@ -30,11 +30,10 @@ export default {
       return this.data.rows.length < this.data.total;
     }
   },
-  created() {
-    window.fetchMore = this.fetchMore
+  mounted() {
     this.$bus.$on('mainScroll', this.handleScroll);
   },
-  destroyed() {
+  beforeDestroy() {
     this.$bus.off('mainScroll', this.handleScroll);
   },
   methods: {
@@ -61,7 +60,10 @@ export default {
       callback("评论成功");
     },
     async handleScroll(mainContainer) {
-      if (this.isloading) {
+      if(!mainContainer) {
+        return;
+      }
+      if (this.isLoading) {
         // 防止滚动触发多次
         return;
       }
@@ -71,10 +73,9 @@ export default {
       // console.log(mainContainer.scrollHeight);
       const dec = Math.abs(mainContainer.scrollHeight - (mainContainer.scrollTop + mainContainer.clientHeight));
       if (dec < range) {
-        console.log("加载更多")
         this.isLoading = true;
         await this.fetchMore();
-        this.isloading = false;
+        this.isLoading = false;
       }
     }
   },

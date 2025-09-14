@@ -85,6 +85,16 @@ export default {
       };
     },
   },
+  mounted() {
+    this.$refs.container.addEventListener("scroll", this.handleScroll);
+    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
+  },
+  beforeDestroy() {
+    this.$refs.container.removeEventListener("scroll", this.handleScroll);
+    this.$bus.$emit("mainScroll");
+
+    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
+  },
   methods: {
     dateFormat, // 要在模版中用，要写在 methods 中
     async fetchData() {
@@ -116,6 +126,12 @@ export default {
           query,
         });
       }
+    },
+    handleScroll() {
+      this.$bus.$emit("mainScroll", this.$refs.container);
+    },
+    handleSetMainScroll(scrollTop) {
+      this.$refs.container.scrollTop = scrollTop;
     },
   },
   watch: {

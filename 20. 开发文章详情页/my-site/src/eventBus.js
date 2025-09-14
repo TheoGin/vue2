@@ -48,6 +48,11 @@ import Vue from 'vue';
  * 含义：主区域滚动条位置变化后触发
  * 参数：
  * - 滚动的dom元素
+ * 
+ * 事件名：mainScroll
+ * 含义：设置主区域滚动条scrollTop的值
+ * 参数：
+ *  - 要设置scrollTop的值
  */
 Vue.prototype.$bus = new Vue({});
 

@@ -19,6 +19,8 @@ export default {
     Layout,
     BlogList,
     BlogCategory,
+  },
+  methods: {
   }
 }
 </script>

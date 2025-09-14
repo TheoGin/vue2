@@ -66,6 +66,10 @@ export default {
     },
     // 设置activeAnchor为正确的值
     setActiveAnchor() {
+      // ??
+      if (!this.doms) {
+        return;
+      }
       const range = 200;
       this.activeAnchor = ""; // 由于后续要重新设置，先清空之前的状态
       for (const dom of this.doms) {
