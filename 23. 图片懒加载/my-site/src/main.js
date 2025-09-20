@@ -5,9 +5,11 @@ import router from "@/router";
 import { showMessage } from "@/utils";
 import '@/mock';
 import VLoading from './directives/loading.js';
+import VLazy from './directives/lazy';
 import './eventBus';
 
 Vue.directive('loading', VLoading);
+Vue.directive('lazy', VLazy);
 
 /*
 window.showMessage = showMessage;

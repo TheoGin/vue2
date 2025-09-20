@@ -43,8 +43,8 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function(options) {
           "commentNumber|0-300": 30,
           // 可能有，也可能没有。从属性值 array 中随机选取 1 个元素，作为最终值
           "thumb|1": [
-            "@image('300x250', '#008c8c','#fff', 'random image')",
-            null,
+            `@image(300x250, @color, #fff, @natural)`,
+            // null,
           ],
           //   createDate: "@date",
           // 变成时间戳
@@ -311,7 +311,7 @@ Mock.mock(/\/api\/comment(\?.+)?/, "get", function(options) {
     msg: "",
     data: {
       // "total|50-200": 0,
-      "total": 52, // 方便测试加载更多
+      total: 52, // 方便测试加载更多
       [`rows|${parsedUrlQuery.limit || 10}`]: [
         {
           id: "@guid",
