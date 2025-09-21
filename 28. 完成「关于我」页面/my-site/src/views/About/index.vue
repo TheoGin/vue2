@@ -1,13 +1,47 @@
 <template>
-  <h1>关于我</h1>
+  <!-- iframe没加载完也要loading -->
+  <div class="about-container" v-loading="loading || !srcLoaded">
+    <iframe
+      class="about-content"
+      :src="src"
+      frameborder="0"
+      @load="srcLoaded = true"
+    ></iframe>
+  </div>
 </template>
 
 <script>
-export default {
+import { mapState } from "vuex";
 
-}
+export default {
+  data(){
+    return {
+      srcLoaded: false,
+    };
+  },
+  computed: mapState("about", {
+    src: "data",
+    loading: "loading",
+  }),
+  created() {
+    this.$store.dispatch("about/fetchAbout");
+  },
+};
 </script>
 
-<style>
+<style scoped lang="less">
+.about-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
 
+.about-content {
+  width: 100%;
+  height: 100%;
+  // iframe是行盒
+  display: block;
+  box-sizing: border-box;
+}
 </style>
