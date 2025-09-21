@@ -7,6 +7,11 @@ import '@/mock';
 import VLoading from './directives/loading.js';
 import VLazy from './directives/lazy';
 import './eventBus';
+import store from "@/store";
+import '@/api/setting'
+
+// 网站全局设置一开始就需要获取
+store.dispatch('setting/fetchSetting');
 
 Vue.directive('loading', VLoading);
 Vue.directive('lazy', VLazy);
@@ -28,6 +33,7 @@ Vue.prototype.$showMessage = showMessage;
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount("#app");
 
 /* import eventBus from "@/eventBus";

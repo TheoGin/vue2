@@ -1,37 +1,37 @@
 <template>
   <div class="contact-container">
-    <a href="https://github.com/TheoGin" class="item">
+    <a :href="data.github" class="item">
       <div class="icon">
         <!-- 给图标套一个元素，方便控制样式 -->
         <Icon type="github" />
       </div>
-      <span>TheoGin</span>
+      <span>{{ data.githubName }}</span>
     </a>
-    <a href="mailto:fuchaojun448@qq.com" class="item">
+    <a :href="`mailto:${data.mail}`" class="item">
       <div class="icon">
         <Icon type="mail" />
       </div>
-      <span>fuchaojun448@qq.com</span>
+      <span>{{ data.mail }}</span>
     </a>
     <a
-      href="tencent://message/?Menu=yes&uin=2559629448&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45"
+      :href="`tencent://message/?Menu=yes&uin=${data.qq}&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45`"
       class="item"
     >
       <div class="icon">
         <Icon type="qq" />
       </div>
-      <span>2559629448</span>
+      <span>{{ data.qq }}</span>
       <div class="qrcode">
-        <img src="./image.png" alt="" />
+        <img :src="data.qqQrCode" alt="" />
       </div>
     </a>
     <a class="item">
       <div class="icon weixin">
         <Icon type="weixin" />
       </div>
-      <span>17818582572</span>
+      <span>{{ data.weixin }}</span>
       <div class="qrcode">
-        <img src="./image.png" alt="" />
+        <img :src="data.weixinQrCode" alt="" />
       </div>
     </a>
   </div>
@@ -39,11 +39,13 @@
 
 <script>
 import Icon from "@/components/Icon";
+import { mapState } from "vuex";
 
 export default {
   components: {
     Icon,
   },
+  computed: mapState('setting', ['data']),
 };
 </script>
 
