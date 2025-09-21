@@ -1,4 +1,5 @@
 import { getSetting } from "@/api/setting";
+import { titleController } from "@/utils";
 
 export default {
   namespaced: true,
@@ -36,6 +37,11 @@ export default {
         // link.href = ctx.state.data.favicon;
         link.href = resp.favicon;
         document.querySelector("head").appendChild(link);
+      }
+
+      if(resp.siteTitle) {
+        // document.title += "-" + resp.siteTitle;
+        titleController.setSiteTitle(resp.siteTitle);
       }
     },
   },

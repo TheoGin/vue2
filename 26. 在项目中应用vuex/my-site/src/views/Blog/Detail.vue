@@ -25,6 +25,7 @@ import { getBlog, postComment } from "@/api/blog";
 import BlogDetail from "@/views/Blog/components/BlogDetail.vue";
 import BlogComment from "@/views/Blog/components/BlogComment.vue";
 import mainScroll from "@/mixins/mainScroll";
+import { titleController } from "@/utils";
 
 export default {
   mixins: [fetchData(null), mainScroll('mainContainer')],
@@ -36,7 +37,10 @@ export default {
   },
   methods: {
     async fetchData() {
-      return await getBlog(this.$route.params.id);
+      const resp = await getBlog(this.$route.params.id);
+      // console.log(resp.title); // CORS跨域方案详解
+      titleController.setRouteTitle(resp.title);
+      return resp;
     },
     /*handleScroll() {
       /!* this.$refs.tocContainer.setActiveAnchor();
