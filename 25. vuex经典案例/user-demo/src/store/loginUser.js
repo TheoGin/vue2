@@ -1,4 +1,5 @@
 import { login, loginOut, whoAmI } from "../api/user";
+// import * as userApi from "../api/user";
 
 export default {
   namespaced: true, // 开启命名空间需要加前缀 loginUser/

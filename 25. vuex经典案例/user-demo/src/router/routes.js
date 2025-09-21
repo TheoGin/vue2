@@ -2,7 +2,7 @@ import Home from "../views/Home.vue";
 import Loading from "../views/Loading.vue";
 import Login from "../views/Login.vue";
 import News from "../views/News.vue";
-import PersonalUser from "../views/PersonalUser.vue";
+import User from "../views/User.vue";
 
 export default [
   {
@@ -20,7 +20,7 @@ export default [
   { path: "/loading", component: Loading },
   {
     path: "/user",
-    component: PersonalUser,
+    component: User,
     meta: {
       auth: true,
     },

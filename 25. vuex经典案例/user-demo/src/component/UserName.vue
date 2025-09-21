@@ -7,7 +7,11 @@
       <a href="" @click.prevent="handleLoginOut">退出</a>
     </template>
 
-    <router-link v-else to="/login">Login</router-link>
+    <!-- <router-link v-else to="/login">Login</router-link> -->
+
+    <!-- 不加 exact-path 会导致/login?returnurl=%2Fnews无法激活样式 -->
+     <!-- APP.vue #nav a.router-link-exact-active { color: #42b983; } -->
+    <router-link v-else to="/login" exact-path>Login</router-link>
   </div>
 </template>
 

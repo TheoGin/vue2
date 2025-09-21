@@ -36,7 +36,11 @@ export default {
     {
       loading: function() {
         return this.$store.state.loginUser.loading;
-    }
+      },
+      user(){
+        return this.$store.state.loginUser.user
+      }
+    } 
   */
   // 第一种写法：
   /*computed: mapState({
@@ -49,11 +53,11 @@ export default {
     })
   },*/
   // 第三种写法：
-  // computed: mapState("loginUser", ["loading"]),
+  computed: mapState("loginUser", ["loading"]),
   // 第四种写法：如果还有其他 computed
-  computed: {
+  /* computed: {
     ...mapState("loginUser", ["loading"]),
-  },
+  }, */
   methods: {
     async handleSubmit() {
       const resp = await this.$store.dispatch("loginUser/login", {

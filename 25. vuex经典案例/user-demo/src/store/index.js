@@ -11,8 +11,10 @@ const store = new Vuex.Store({
     loginUser,
     counter,
   },
+  strict: true, // 开启严格模式后，只允许通过mutation改变状态，否则Error: [vuex] do not mutate vuex store state outside mutation handlers.
 });
 
+// 测试
 window.store = store;
 
 export default store;
