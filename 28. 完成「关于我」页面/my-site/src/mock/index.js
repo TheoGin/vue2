@@ -3,6 +3,7 @@ import "./banner";
 import "./blog";
 import "./setting";
 import "./about";
+import "./project";
 
 // 指定被拦截的 Ajax 请求的响应时间
 Mock.setup({
