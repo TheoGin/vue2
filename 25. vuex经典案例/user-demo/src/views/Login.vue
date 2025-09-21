@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <div class="form-item">
       <label>账号：</label>
       <input type="text" v-model="loginId" />
@@ -17,14 +17,57 @@
   </form>
 </template>
 <script>
+import { mapState } from "vuex";
 
 export default {
   data() {
     return {
       loginId: "",
       loginPwd: "",
-      loading: false,
     };
+  },
+  /* computed: {
+    loading() {
+      return this.$store.state.loginUser.loading;
+    },
+  }, */
+  // mapState可以简化
+  /* mapState("loginUser", ["loading"])返回值为（用计算属性实现）：
+    {
+      loading: function() {
+        return this.$store.state.loginUser.loading;
+    }
+  */
+  // 第一种写法：
+  /*computed: mapState({
+    loading: state => state.loginUser.loading,
+  }),*/
+  // 第二种写法：
+  /*computed: {
+    ...mapState({
+      loading: state => state.loginUser.loading,
+    })
+  },*/
+  // 第三种写法：
+  // computed: mapState("loginUser", ["loading"]),
+  // 第四种写法：如果还有其他 computed
+  computed: {
+    ...mapState("loginUser", ["loading"]),
+  },
+  methods: {
+    async handleSubmit() {
+      const resp = await this.$store.dispatch("loginUser/login", {
+        loginId: this.loginId,
+        loginPwd: this.loginPwd,
+      });
+      if (resp) {
+        // 有目标路径就调到returnurl，否则跳转到首页
+        const path = this.$route.query.returnurl || "/";
+        this.$router.push(path);
+      } else {
+        alert("账号或密码错误！");
+      }
+    },
   },
 };
 </script>
@@ -35,14 +78,17 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .form-item input {
   height: 26px;
   font-size: 14px;
   flex: 1 1 auto;
 }
+
 .form-item label {
   width: 70px;
 }
+
 .form-item button {
   flex: 1 1 auto;
   background: #50936c;
