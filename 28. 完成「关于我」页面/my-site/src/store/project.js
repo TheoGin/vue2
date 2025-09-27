@@ -1,30 +1,30 @@
-import {getProject} from "@/api/project";
+import { getProject } from "@/api/project";
 
 export default {
-    namespaced: true,
-    state: {
-        loading: false,
-        data: []
+  namespaced: true,
+  state: {
+    loading: false,
+    data: [],
+  },
+  mutations: {
+    setLoading(state, payload) {
+      state.loading = payload;
     },
-    mutations: {
-        setLoading(state, payload) {
-            state.loading = payload;
-        },
-        setData(state, payload) {
-            state.data = payload;
-        }
+    setData(state, payload) {
+      state.data = payload;
     },
-    actions: {
-        async  fetchProject(ctx) {
-            if(ctx.state.data.length) {
-                return;
-            }
-           ctx.commit('setLoading',  true);
+  },
+  actions: {
+    async fetchProject(ctx) {
+      if (ctx.state.data.length) {
+        return;
+      }
+      ctx.commit("setLoading", true);
 
-           const resp = await getProject();
-           ctx.commit('setData',  resp);
+      const resp = await getProject();
+      ctx.commit("setData", resp);
 
-           ctx.commit('setLoading',  false);
-        }
-    }
-}
+      ctx.commit("setLoading", false);
+    },
+  },
+};
