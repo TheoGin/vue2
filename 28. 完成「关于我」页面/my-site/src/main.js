@@ -9,6 +9,7 @@ import VLazy from './directives/lazy';
 import './eventBus';
 import store from "@/store";
 import '@/api/setting'
+import '@/api/project'
 
 // 网站全局设置一开始就需要获取
 store.dispatch('setting/fetchSetting');

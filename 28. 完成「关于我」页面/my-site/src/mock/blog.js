@@ -34,7 +34,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function(options) {
         {
           id: "@guid",
           title: "@ctitle(10,50)",
-          description: "@cparagraph(1,10)",
+          description: "@cparagraph(1,5)",
           category: {
             "id|1-10": 0,
             name: "分类@id",

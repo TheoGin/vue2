@@ -4,6 +4,6 @@ export async function getProject() {
   return await request.get("/api/project");
 }
 
-getProject().then(r=> {
+/*getProject().then(r=> {
   console.log(r)
-})
+})*/
