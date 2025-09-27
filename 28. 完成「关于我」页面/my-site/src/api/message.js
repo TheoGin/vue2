@@ -7,17 +7,17 @@ import request from "@/api/request";
  * @returns {Promise<AxiosResponse<any>>}
  */
 export async function getMessages(page = 1, limit = 10) {
-    return await request.get("/api/message", {
-        params: {
-            page,
-            limit,
-        },
-    });
+  return await request.get("/api/message", {
+    params: {
+      page,
+      limit,
+    },
+  });
 }
 
- getMessages().then((r) => {
- console.log(r);
-});
+/* getMessages().then((r) => {
+  console.log(r);
+}); */
 
 /**
  * 提交留言
@@ -25,7 +25,7 @@ export async function getMessages(page = 1, limit = 10) {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export async function postMessage(messageInfo) {
-    return await request.post("/api/message", messageInfo);
+  return await request.post("/api/message", messageInfo);
 }
 
 /*

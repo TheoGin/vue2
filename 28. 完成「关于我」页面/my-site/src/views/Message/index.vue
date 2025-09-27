@@ -17,10 +17,6 @@ import { getMessages, postMessage } from "@/api/message";
 import mainScroll from "@/mixins/mainScroll";
 
 export default {
-  mixins: [
-    fetchData({ total: 0, rows: [] }),
-    mainScroll('messageContainer'),
-  ],
   components: {
     MessageArea,
   },
@@ -30,16 +26,17 @@ export default {
       limit: 10,
     };
   },
-  computed: {
-    hasMore() {
-      return this.data.rows.length < this.data.total;
-    },
-  },
+  mixins: [fetchData({ total: 0, rows: [] }), mainScroll("messageContainer")],
   mounted() {
     this.$bus.$on("mainScroll", this.handleScroll);
   },
   beforeDestroy() {
     this.$bus.$off("mainScroll", this.handleScroll);
+  },
+  computed: {
+    hasMore() {
+      return this.data.rows.length < this.data.total;
+    },
   },
   methods: {
     async fetchData() {
@@ -59,7 +56,7 @@ export default {
       // 一个可接受的范围，在这个范围内都算达到了底部
       const range = 100; // 不用完全相等，滚动容器的底部和页面底部之间的距离小于100即可
       const dec = Math.abs(
-          mainContainer.scrollHeight -
+        mainContainer.scrollHeight -
           (mainContainer.scrollTop + mainContainer.clientHeight)
       );
       if (dec <= range) {
@@ -85,7 +82,10 @@ export default {
 
 <style scoped lang="less">
 .message-container {
-  padding: 20px;
+  // padding: 20px;
+  padding: 25px 0;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
   overflow-y: auto;
   height: 100%;
