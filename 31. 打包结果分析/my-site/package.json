@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build --modern",
+    "build": "vue-cli-service build",
     "test:Pager": "vue serve ./src/components/Pager/test.vue --open",
     "test:Avatar": "vue serve ./src/components/Avatar/test.vue --open",
     "test:Icon": "vue serve ./src/components/Icon/test.vue --open",
