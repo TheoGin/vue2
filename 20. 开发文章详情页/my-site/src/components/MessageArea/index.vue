@@ -52,6 +52,9 @@ export default {
       this.$emit("submit", formData, callback);
     }, */
   },
+  created() {
+    console.log('this.$listeners', this.$listeners) // this.$listeners
+  }
 };
 </script>
 
