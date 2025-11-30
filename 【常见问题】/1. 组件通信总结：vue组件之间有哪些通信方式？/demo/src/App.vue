@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <!-- 除 msg 外，其他均为 attribute -->
-    <HelloWorld
-        data-a="1"
-        data-b="2"
-        msg="Welcome to Your Vue.js App"
-    />
+    <!-- 点击没效果 -->
+    <HelloWorld @click="handleClick" />
+    <!-- 要用原生的要加上 .native -->
+    <HelloWorld @click.native="handleClick" />
   </div>
 </template>
 
@@ -15,6 +13,11 @@ import HelloWorld from "./components/HelloWorld.vue";
 export default {
   components: {
     HelloWorld,
+  },
+  methods: {
+    handleClick() {
+      console.log("handleClick");
+    },
   },
 };
 </script>
