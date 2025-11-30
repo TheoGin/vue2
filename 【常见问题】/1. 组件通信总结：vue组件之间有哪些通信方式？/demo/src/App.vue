@@ -1,30 +1,19 @@
 <template>
-  <div>
-    <h1>
-      App {{ number.value }}
-      <button @click="number.value++">+</button>
-    </h1>
-
-    <A />
+  <div id="app">
+    <HelloWorld
+        style="color:red"
+        class="hello"
+        msg="Welcome to Your Vue.js App"
+    />
   </div>
 </template>
 
 <script>
-import store from "./store";
-import A from "./components/A";
+import HelloWorld from "./components/HelloWorld.vue";
+
 export default {
-  provide: {
-    a: 1,
-    b: 2,
-  },
   components: {
-    A,
-  },
-  data() {
-    return {
-      number: store.number,
-    };
+    HelloWorld,
   },
 };
 </script>
-
