@@ -6,5 +6,7 @@ module.exports = {
         target: 'http://test.mysite.com'
       }
     }
-  }
+  },
+  // 要记得引入！！！
+  configureWebpack: require('./webpack.config')
 }
