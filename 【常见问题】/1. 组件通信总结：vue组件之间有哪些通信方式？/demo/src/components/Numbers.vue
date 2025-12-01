@@ -18,7 +18,7 @@
 export default {
   props: ["n1", "n2"],
   created() {
-    console.log(this.$parent) // 可以拿到父组件的实例
+    // console.log(this.$parent) // 可以拿到父组件的实例
   }
 };
 </script>
