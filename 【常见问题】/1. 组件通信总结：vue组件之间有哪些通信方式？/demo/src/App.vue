@@ -1,23 +1,31 @@
 <template>
   <div id="app">
-    <!-- 点击没效果 -->
-    <HelloWorld @click="handleClick" />
-    <!-- 要用原生的要加上 .native -->
-    <HelloWorld @click.native="handleClick" />
+    <numbers
+      :n1="n1"
+      :n2="n2"
+      @update:n1="n1 = $event"
+      @update:n2="n2 = $event"
+    />
+    <!-- 等价于 -->
+     <numbers :n1.sync="n1" :n2.sync="n2" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Numbers from "./components/Numbers.vue";
 
 export default {
   components: {
-    HelloWorld,
+    Numbers,
   },
-  methods: {
-    handleClick() {
-      console.log("handleClick");
-    },
+  data() {
+    return {
+      n1: 0,
+      n2: 0,
+    };
   },
+  created() {
+    console.log('this.$children', this.$children)
+  }
 };
 </script>
