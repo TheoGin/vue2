@@ -45,9 +45,9 @@
       </div>
       <div class="form-item">
         <label>年龄</label>
-        <!-- <input type="number" v-model.number="formData.age" /> -->
-        <!-- <Number :value="formData.age" @input="formData.age = $event" /> -->
-        <Number v-model="formData.age"/>
+        <!--<input type="text" v-model.number="formData.age">-->
+        <!--<number :value="formData.age" @input="formData.age = $event"  />-->
+        <number v-model="formData.age"  />
       </div>
       <div class="form-item">
         <label>个人简介</label>
