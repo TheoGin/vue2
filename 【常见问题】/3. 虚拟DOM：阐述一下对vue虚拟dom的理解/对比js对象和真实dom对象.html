@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      const loopNum = 10000000;
+      console.time("JS object");
+      for (let i = 0; i < loopNum; i++) {
+        var obj = {};
+      }
+      console.timeEnd("JS object");
+
+      console.time("dom element");
+      for (let i = 0; i < loopNum; i++) {
+        const htmlDivElement = document.createElement("div");
+      }
+      console.timeEnd("dom element");
+
+      /*
+        JS object: 108.44482421875 ms
+        dom element: 1814.4169921875 ms
+      * */
+    </script>
+  </body>
+</html>
