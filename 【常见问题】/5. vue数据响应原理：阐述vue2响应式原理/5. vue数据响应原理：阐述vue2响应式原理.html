@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>obj.a： {{ obj.a }}
+        <button type="button" @click="delete obj.a">delete obj.a</button>
+        <button type="button" @click="$delete(obj, 'a')">vm.$delete(obj, 'a')</button>
+      </p>
+      <p>obj.c： {{ obj.c }}
+        <button type="button" @click="obj.c = 123">add obj.c</button>
+        <button type="button" @click="$set(obj, 'c', 123)">vm.$set(obj, 'c')</button>
+      </p>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          obj: {
+            a: 1,
+            b: 2
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
