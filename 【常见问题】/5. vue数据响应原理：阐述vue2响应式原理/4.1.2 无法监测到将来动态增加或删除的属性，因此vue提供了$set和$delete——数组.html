@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in arr">{{ item }}</li>
+      </ul>
+      <h2>通过下标更改值，arr[0] = 123，无法监听到，用 this.$set(arr, '0', 123)才可以。
+        但通过arr[1].name = 'abc',可以被监听到</h2>
+      <p>
+        <button type="button" @click="arr[0] = 123">arr[0] = 123</button>
+        <button type="button" @click="$set(arr, '0', 456)">$set(arr, '0', 456)</button>
+        <button type="button" @click="arr[1].name = 'jack'">arr[1].name = 'jack'</button>
+      </p>
+      <hr>
+      <h2>用数组的方法更改数组，arr.push(100)、arr.sort(() => Math.random - 0.5)随机打乱数组顺序，可以被监听到，因为vue更改了数组的隐式原型</h2>
+      <p>
+        <button type="button" @click="arr.sort(() => Math.random() - 0.5)">随机打乱数组顺序</button>
+        <button type="button" @click="arr.push('abc')">arr.push('abc')</button>
+      </p>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          obj: {
+            a: 1,
+            b: 2
+          },
+          arr: [
+            1,
+            { name: 'sopho' },
+            3,
+            4,
+          ]
+        }
+      })
+    </script>
+  </body>
+</html>
