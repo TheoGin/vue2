@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <input v-model.number="money" type="number" />
-    <p>
-      {{ money | formatMoney(" ") }}
-    </p>
+    <input type="number" v-model.number="money" />
+    <p>money: {{ money | formatMoney }}</p>
   </div>
 </template>
 
@@ -27,4 +25,3 @@ export default {
   text-align: center;
 }
 </style>
-
