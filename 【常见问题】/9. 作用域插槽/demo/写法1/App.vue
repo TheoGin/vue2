@@ -2,35 +2,16 @@
   <div id="app">
     <async-content :productsPromise="fetchGetProducts()">
       <template #loading>加载中……</template>
-      <!-- { "content": [ { "id": 1, "name": "xiaomi", "stock": 50 }, { "id": 2, "name": "iphone", "stock": 70 }, { "id": 3, "name": "huawei", "stock": 60 } ] } 本质是函数调用，可以解构出来 -->
-      <template #default="{ content }">
+      <template v-slot:default="content">
         <ul>
           <li v-for="item in content" :key="item.id">
             商品名：{{ item.name }} 库存：{{ item.stock }}
           </li>
         </ul>
       </template>
-      <!-- { "error": { "error": {}, "message": "not found" } } 本质是函数调用，可以解构出来-->
-      <template v-slot:error="{ error }">
+      <template #error="error">
         <div style="color: red">{{ error.message }}</div>
       </template>
-      <!-- 本质：
-        loading: function() {
-          // 返回 vnode
-        }
-        loading()
-
-        // default: function(dataObj) {
-        default: function({ content }) { // 参数是对象，可以解构出来
-          // 返回 vnode
-        }
-        default({ content: content })
-
-        error: function(errorObj) {
-          // 返回 vnode
-        }
-        error({ error: error })
-      -->
     </async-content>
   </div>
 </template>

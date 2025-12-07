@@ -1,13 +1,9 @@
 <template>
   <div>
     <slot name="loading" v-if="loading">默认加载中……</slot>
-    <!--通过 v-bind 将子组件的插槽数据绑定到父组件插槽的位置
-      1、v-bind="error" 直接传递的就是 error
-      2、v-bind:error="error" 这种传递方式会变成 v-bind="{ error }
-    -->
-    <slot name="error" v-else-if="error" v-bind:error="error">默认错误信息……</slot>
-    <!-- v-bind:content="content" 这种传递方式会变成 v-bind="{ content } -->
-    <slot name="default" v-else :content="content">默认数据……{{ content }}</slot>
+    <!-- 错误写第二个，因为可能 content是 [] 空数组 -->
+    <slot name="error" v-else-if="error" v-bind="error">默认错误信息……</slot>
+    <slot name="default" v-else v-bind="content">默认数据……{{ content }}</slot>
   </div>
 </template>
 
@@ -22,8 +18,6 @@ export default {
     };
   },
   async created() {
-    console.log('this.$slots', this.$slots);
-    console.log('this.$scopedSlots', this.$scopedSlots);
     try {
       this.content = await this.productsPromise;
       this.error = null;
@@ -37,5 +31,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
