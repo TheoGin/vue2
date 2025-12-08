@@ -4,11 +4,9 @@
       <button @click="prev">prev</button>
       <button @click="next">next</button>
     </div>
-    <div class="img-container">
-      <transition :name="`${direction}-image`" appear>
-        <img class="image" :src="curImage" :key="curIndex" />
-      </transition>
-    </div>
+    <transition :name="`${direction}-image`" appear>
+      <img class="image" :src="curImage" :key="curIndex" />
+    </transition>
   </div>
 </template>
 
@@ -24,7 +22,7 @@ export default {
         "https://thirdqq.qlogo.cn/g?b=sdk&k=pfIficic6WRliaLULZudVI5Tw&s=640&t=1600139160&tp=webp"
       ],
       curIndex: 0,
-      direction: "next"
+      direction: 'next'
     };
   },
   computed: {
@@ -41,14 +39,14 @@ export default {
       if (this.curIndex > this.maxIndex) {
         this.curIndex = 0;
       }
-      this.direction = "next";
+      this.direction = 'next'
     },
     prev() {
       this.curIndex--;
       if (this.curIndex < 0) {
         this.curIndex = this.maxIndex;
       }
-      this.direction = "prev";
+      this.direction = 'prev'
     }
   }
 };
@@ -63,26 +61,15 @@ export default {
   margin: 1em 0.5em;
 }
 
-.img-container {
-  position: relative;
-  overflow: hidden;
-  width: 200px;
-  height: 200px;
-  margin-top: 100px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-}
-
 .image {
   /* 加上定位，不然两个元素不会重叠在一起 */
   position: absolute;
-  //top: 100px;
-  top: 0;
-  left: 0;
+  top: 100px;
   width: 200px;
   height: 200px;
+  border-radius: 50%;
+  left: 50%;
+  margin-left: -100px;
 }
 
 .next-image-enter,
@@ -101,6 +88,6 @@ export default {
 .prev-image-leave-active,
 .next-image-enter-active,
 .next-image-leave-active {
-  transition: 0.5s;
+  transition: .5s;
 }
 </style>
