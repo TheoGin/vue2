@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+  </head>
+  <body>
+    <ul>
+      <li>title1</li>
+      <li>title2</li>
+    </ul>
+    <button>交换</button>
+
+    <script>
+      function getY(dom) {
+        return dom.getBoundingClientRect().top
+      }
+
+      function raf(callback) {
+        // 下一帧渲染之前
+        requestAnimationFrame(() => {
+          // 下下一帧渲染之前，就是上面的下一帧渲染之后
+          requestAnimationFrame(callback)
+        })
+      }
+
+      function handleTransition(dom, initY) {
+        // 3、记录变化之后的位置
+        const curY = getY(dom);
+        // 4、计算两个位置的差值
+        const dis = initY - curY;
+        // 5、用transform将元素回退到之前的位置
+        dom.style.transform = `translateY(${dis}px)`
+        // 6、去掉移动回去的样式 加上过渡，去掉transform，然后去掉过渡
+        // 需要重新渲染
+        raf(() => {
+          dom.style.transition = '.5s';
+          dom.style.transform = `none`;
+          // 去掉过渡，避免影响下一次
+          dom.addEventListener('transitionend', () => {
+            dom.style.transition = 'none';
+          }, {
+            once: true, // 只监听一次即可
+          })
+        })
+      }
+
+      // A-》B，使用flip 一种思路
+      document.querySelector('button').onclick = function () {
+        // 1、记录变化之前的位置
+        const li1 = document.querySelector('ul li:nth-child(1)');
+        const li1InitY = getY(li1);
+        const li2 = document.querySelector('ul li:nth-child(2)');
+        const li2InitY = getY(li2);
+
+        // 2、无过渡从 A 变化到 B
+        document.querySelector('ul').insertBefore(li2, li1)
+
+        handleTransition(li1, li1InitY)
+        handleTransition(li2, li2InitY)
+      }
+    </script>
+  </body>
+</html>

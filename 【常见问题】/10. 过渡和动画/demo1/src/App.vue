@@ -4,11 +4,7 @@
       <button @click="prev">prev</button>
       <button @click="next">next</button>
     </div>
-    <transition
-      :name="`image-${direction}`"
-      enter-active-class="image-enter-active"
-      leave-active-class="image-leave-active"
-    >
+    <transition :name="`${direction}-image`" appear>
       <img class="image" :src="curImage" :key="curIndex" />
     </transition>
   </div>
@@ -23,10 +19,10 @@ export default {
         "https://10.idqqimg.com/eth/ajNVdqHZLLDqYf0PtFibF9JNOnRbAw7DicWPicmfRkQwPeK2mnZ7ZJzZFdsCwCWdcwhEqoVphXiaDHE/130?tp=webp",
         "https://thirdqq.qlogo.cn/g?b=sdk&k=LaERpMuX1ZjWTQmhrhst6Q&s=100&t=0&tp=webp",
         "https://10.idqqimg.com/eth/ajNVdqHZLLDXIjdTYsqbfkxiaibd3lYGEgfiaEwficYfK2ogZDicCxaKibVibGA2Cj2ltgOvCm1tbRs1iac/130?tp=webp",
-        "https://thirdqq.qlogo.cn/g?b=sdk&k=pfIficic6WRliaLULZudVI5Tw&s=640&t=1600139160&tp=webp",
+        "https://thirdqq.qlogo.cn/g?b=sdk&k=pfIficic6WRliaLULZudVI5Tw&s=640&t=1600139160&tp=webp"
       ],
       curIndex: 0,
-      direction: "next",
+      direction: 'next'
     };
   },
   computed: {
@@ -35,7 +31,7 @@ export default {
     },
     maxIndex() {
       return this.images.length - 1;
-    },
+    }
   },
   methods: {
     next() {
@@ -43,16 +39,16 @@ export default {
       if (this.curIndex > this.maxIndex) {
         this.curIndex = 0;
       }
-      this.direction = "next";
+      this.direction = 'next'
     },
     prev() {
       this.curIndex--;
       if (this.curIndex < 0) {
         this.curIndex = this.maxIndex;
       }
-      this.direction = "prev";
-    },
-  },
+      this.direction = 'prev'
+    }
+  }
 };
 </script>
 
@@ -60,10 +56,13 @@ export default {
 .container {
   text-align: center;
 }
+
 .btns button {
   margin: 1em 0.5em;
 }
+
 .image {
+  /* 加上定位，不然两个元素不会重叠在一起 */
   position: absolute;
   top: 100px;
   width: 200px;
@@ -72,19 +71,23 @@ export default {
   left: 50%;
   margin-left: -100px;
 }
-.image-next-enter,
-.image-prev-leave-to {
+
+.next-image-enter,
+.prev-image-leave-to {
   opacity: 0;
   transform: translateX(200px);
 }
-.image-next-leave-to,
-.image-prev-enter {
+
+.next-image-leave-to,
+.prev-image-enter {
   opacity: 0;
   transform: translateX(-200px);
 }
-.image-enter-active,
-.image-leave-active {
-  transition: 0.5s;
+
+.prev-image-enter-active,
+.prev-image-leave-active,
+.next-image-enter-active,
+.next-image-leave-active {
+  transition: .5s;
 }
 </style>
-
