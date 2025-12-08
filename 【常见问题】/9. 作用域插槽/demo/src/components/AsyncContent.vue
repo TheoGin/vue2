@@ -3,7 +3,7 @@
     <slot name="loading" v-if="loading">默认加载中……</slot>
     <!--通过 v-bind 将子组件的插槽数据绑定到父组件插槽的位置
       1、v-bind="error" 直接传递的就是 error
-      2、v-bind:error="error" 这种传递方式会变成 v-bind="{ error }
+      2、v-bind:error="error" 这种传递方式会变成 v-bind="{ error }"
     -->
     <slot name="error" v-else-if="error" v-bind:error="error">默认错误信息……</slot>
     <!-- v-bind:content="content" 这种传递方式会变成 v-bind="{ content } -->
@@ -28,8 +28,7 @@ export default {
       this.content = await this.productsPromise;
       this.error = null;
     } catch (err) {
-      // this.error = err; // new Error("not found")：Error对象没法响应式 ——》换成普通对象
-      this.error = { error: err, message: err.message };
+      this.error = err;
       this.content = null;
     } finally {
       this.loading = false;
