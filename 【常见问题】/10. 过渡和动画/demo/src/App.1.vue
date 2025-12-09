@@ -1,9 +1,15 @@
 <template>
   <div id="app">
-    <button @click="titleLevel--">level-</button>
-    <button @click="titleLevel++">level+</button>
-    <transition name="title" appear>
-      <component :is="`h${titleLevel}`">title level {{ titleLevel }}</component>
+    <button @click="titleLevel++">titleLevel+1</button>
+    <button @click="titleLevel--">titleLevel-1</button>
+    <!-- <ul>123</ul> -->
+    <!--<component is="ul">123</component>-->
+    <!--
+      mode="out-in" 先消失，后进入
+      mode="in-out" 先进入，再消失
+    -->
+    <transition name="title" appear mode="out-in">
+      <component :is="`h${titleLevel}`">titleLevel：{{ titleLevel }}</component>
     </transition>
   </div>
 </template>
@@ -12,9 +18,9 @@
 export default {
   data() {
     return {
-      titleLevel: 1,
+      titleLevel: 1
     };
-  },
+  }
 };
 </script>
 
@@ -22,13 +28,14 @@ export default {
 #app {
   text-align: center;
 }
+
 .title-enter,
 .title-leave-to {
   opacity: 0;
 }
+
 .title-enter-active,
 .title-leave-active {
-  transition: 3s;
+  transition: .5s;
 }
 </style>
-
