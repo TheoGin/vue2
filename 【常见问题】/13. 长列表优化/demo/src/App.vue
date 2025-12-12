@@ -1,14 +1,21 @@
 <template>
   <div id="app">
-    <div class="scroller">
-      <ListItem v-for="item in items" :key="item.id" :item="item" />
-    </div>
+    <RecycleScroller
+      class="scroller"
+      :items="items"
+      :item-size="54"
+      v-slot="{ item }"
+    >
+      <list-item :item="item.item" />
+    </RecycleScroller>
   </div>
 </template>
 
 <script>
 import ListItem from "./components/ListItem.vue";
-// import RecycleScroller from './components/RecycleScroller';
+// import { RecycleScroller } from "vue-virtual-scroller";
+// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import RecycleScroller from "./components/RecycleScroller";
 var items = [];
 for (var i = 0; i < 10000; i++) {
   items.push({
@@ -18,7 +25,7 @@ for (var i = 0; i < 10000; i++) {
   });
 }
 export default {
-  components: { ListItem },
+  components: { ListItem, RecycleScroller },
   data() {
     return {
       items
@@ -31,11 +38,13 @@ export default {
 #app {
   width: 100%;
   margin: 0 auto;
+  margin-top: 50px;
 }
 .scroller {
   width: 500px;
   margin: 0 auto;
   height: 500px;
-  overflow: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 </style>

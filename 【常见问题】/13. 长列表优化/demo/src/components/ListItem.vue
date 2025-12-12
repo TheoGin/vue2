@@ -13,6 +13,9 @@ export default {
       type: Object,
       default: []
     }
+  },
+  mounted() {
+    console.log("this.item", this.item);
   }
 };
 </script>
@@ -24,5 +27,7 @@ export default {
   border-bottom: 1px solid #ccc;
   height: 54px;
   line-height: 54px;
+  box-sizing: border-box;
+  padding: 0 10px;
 }
 </style>
