@@ -10,7 +10,7 @@
         v-for="poolItem in poolItems"
         :key="poolItem.item[keyField]"
       >
-        <slot :item="poolItem"></slot>
+        <slot :item="poolItem.item"></slot>
       </div>
     </div>
   </div>
@@ -57,8 +57,8 @@ export default {
   methods: {
     setPool() {
       const scrollTop = this.$refs.divContainer.scrollTop;
-      let startIndex = Math.floor(scrollTop / this.itemSize);
       const height = this.$refs.divContainer.clientHeight;
+      let startIndex = Math.floor(scrollTop / this.itemSize);
       let endIndex = Math.ceil((scrollTop + height) / this.itemSize); // slice 左闭右开，所以不需要减 1
 
       // 前后多渲染10条，防止滚动条滚动过快出现白屏

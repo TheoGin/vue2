@@ -6,16 +6,18 @@
       :item-size="54"
       v-slot="{ item }"
     >
-      <list-item :item="item.item" />
+      <list-item :item="item" />
     </RecycleScroller>
   </div>
 </template>
 
 <script>
 import ListItem from "./components/ListItem.vue";
-// import { RecycleScroller } from "vue-virtual-scroller";
-// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-import RecycleScroller from "./components/RecycleScroller";
+
+// 使用第三方插件的 RecycleScroller
+import { RecycleScroller } from "vue-virtual-scroller";
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+// import RecycleScroller from "./components/RecycleScroller";
 var items = [];
 for (var i = 0; i < 10000; i++) {
   items.push({
