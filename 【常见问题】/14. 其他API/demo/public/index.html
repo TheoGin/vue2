@@ -7,6 +7,7 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
+
       [v-cloak] {
         display: none;
       }
@@ -19,6 +20,7 @@
         properly without JavaScript enabled. Please enable it to continue.
       </strong>
     </noscript>
+    <!-- 通过属性控制，然后 CSS用属性选择器，编译之后，去掉这个属性 -->
     <div id="app" v-cloak></div>
     <!-- built files will be auto injected -->
   </body>

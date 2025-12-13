@@ -1,27 +1,26 @@
 <template>
   <div>
     <h1>Hello Vue</h1>
-    <h2>{{ title }}</h2>
+    <h2 v-pre>{{ title }}</h2>
   </div>
 </template>
 
 <script>
-var config = {
+const config = {
   created() {
-    console.log('config created');
+    console.log("mixins config created");
   },
 };
+
 export default {
   mixins: [config],
   created() {
-    console.log('app created');
-    console.log(this);
+    console.log("App created");
   },
   data() {
     return {
-      title: 'asdfasfd',
+      title: "asdfasfd",
     };
   },
 };
 </script>
-
