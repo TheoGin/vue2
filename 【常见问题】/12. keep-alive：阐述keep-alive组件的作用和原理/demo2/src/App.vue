@@ -41,8 +41,10 @@
           </li>
         </ul>
       </div>
+      <!-- tabs 为模块名 -->
+      <!--<keep-alive :include="$store.state.tabs.state.pageNames"> 错误写法 -->
       <keep-alive :include="$store.state.tabs.pageNames">
-        <router-view></router-view>
+        <router-view />
       </keep-alive>
     </div>
   </div>
@@ -50,17 +52,27 @@
 
 <script>
 export default {
-  created() {
-    console.log(this);
+  mounted() {
+    console.log('this.$store', this.$store);
   },
   methods: {
     handleAddPage(pageName) {
       this.$store.commit('tabs/addPage', pageName);
+
+      // 异步提到 actions，不然可以直接 commit到 mutations
+      // this.$store.dispatch('tabs/addPage', pageName);
     },
     handleRemovePage(pageName) {
       this.$store.commit('tabs/removePage', pageName);
+      // this.$store.dispatch('tabs/removePage', pageName);
     },
   },
 };
 </script>
 
+<style>
+
+input {
+  border: 1px solid #ccc;
+}
+</style>

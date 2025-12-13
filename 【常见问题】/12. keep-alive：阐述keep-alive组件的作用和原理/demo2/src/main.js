@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import 'tailwindcss/tailwind.css';
 
+window.store = store
 new Vue({
   render: (h) => h(App),
   store,

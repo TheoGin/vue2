@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 10px">
     <h1>Page1</h1>
     <input type="text">
   </div>
