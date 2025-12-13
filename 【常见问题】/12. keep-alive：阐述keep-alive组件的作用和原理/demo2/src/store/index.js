@@ -24,14 +24,15 @@ const tabsModules = {
       console.log('state.pageNames', state.pageNames);
     },
   },
-  actions: {
+  // 异步操作使用 actions
+  /*actions: {
     addPage({commit}, pageName) {
       commit("addPage", pageName);
     },
     removePage({commit}, pageName) {
       commit("removePage", pageName);
     },
-  },
+  },*/
 };
 
 export default new Vuex.Store({
