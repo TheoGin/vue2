@@ -15,7 +15,7 @@
     </div>
     <div class="h-10"></div>
     <div class="min-h-screen py-10 lg:w-1/2 h-10 mx-auto">
-      <transition :name="routerSwitchInfo.direction">
+      <transition :name="direction">
         <router-view />
       </transition>
     </div>
@@ -26,46 +26,49 @@
 </template>
 
 <script>
-import store from './store';
 
 export default {
-  data() {
-    return {
-      routerSwitchInfo: store.routerSwitch,
-    };
+  computed: {
+    direction() {
+      return this.$store.state.switchTransition.direction;
+    },
   },
 };
 </script>
 
 <style scoped>
-.right-leave-active {
-  position: absolute;
-  width: 100%;
-  transition: 0.5s;
+.left-enter {
+  opacity: 0;
   transform: translateX(-50%);
-  opacity: 0;
 }
-.right-enter {
+.left-leave-to {
+  opacity: 0;
   transform: translateX(50%);
-  opacity: 0;
-}
-.right-enter-active {
-  transition: 0.5s;
+  position: absolute;
+  left: 0;
+  /* 要设置宽度 */
+  width: 100%;
 }
 
+.left-enter-active,
 .left-leave-active {
-  position: absolute;
-  width: 100%;
-  transition: 0.5s;
+  transition: .5s;
+}
+
+.right-enter {
+  opacity: 0;
   transform: translateX(50%);
-  opacity: 0;
 }
-.left-enter {
+.right-leave-to {
+  opacity: 0;
   transform: translateX(-50%);
-  opacity: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
 }
-.left-enter-active {
-  transition: 0.5s;
+
+.right-enter-active,
+.right-leave-active {
+  transition: .5s;
 }
 </style>
-
