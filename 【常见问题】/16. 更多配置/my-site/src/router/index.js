@@ -10,7 +10,10 @@ const router = new VueRouter({
   // 配置
   mode: "history",
   routes, // 路由匹配规则
+  // base: '/news', // 会导致硬编码，要改改两个地方
+  base: process.env.BASE_URL, // process.env.BASE_URL会从 vue.config.js 读 publicPath
 });
+console.log('process.env.BASE_URL', process.env.BASE_URL); // process.env.BASE_URL /news/
 
 // 后置路由守卫
 router.afterEach((to, from) => {
