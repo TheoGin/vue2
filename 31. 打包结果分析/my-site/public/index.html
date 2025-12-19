@@ -11,7 +11,20 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <style>
+        img {
+          width: 200px;
+          height: 200px;
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          margin-left: -100px;
+          margin-top: -100px;
+        }
+      </style>
+      <img src="./img/loading.gif" alt="">
+    </div>
     <!-- 开发不需要用 CDN，否则 vue的dev-tools就没了 -->
     <% if(process.env.NODE_ENV === 'production') { %>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
