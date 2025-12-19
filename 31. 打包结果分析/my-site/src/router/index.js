@@ -4,7 +4,9 @@ import routes from "./routes";
 import store from "../store";
 import { titleController } from "@/utils";
 
-Vue.use(VueRouter); // Vue.use(插件)  在Vue中安装插件
+if (!window.VueRouter) { // 打包后没有 use
+  Vue.use(VueRouter); // Vue.use(插件)  在Vue中安装插件
+}
 
 const router = new VueRouter({
   // 配置

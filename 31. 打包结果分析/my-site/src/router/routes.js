@@ -1,15 +1,15 @@
-import Home from "@/views/Home";
+/*import Home from "@/views/Home";
 import About from "@/views/About";
 import Blog from "@/views/Blog";
 import Message from "@/views/Message";
 import Project from "@/views/Project";
-import Detail from "@/views/Blog/Detail.vue";
+import Detail from "@/views/Blog/Detail.vue";*/
 
 export default [
   {
     name: "Home",
     path: "/",
-    component: Home,
+    component: () => import(/* webpackChunkName: "Home" */ "@/views/Home"),
     meta: {
       title: "首页",
     },
@@ -17,7 +17,7 @@ export default [
   {
     name: "About",
     path: "/about",
-    component: About,
+    component: () => import(/* webpackChunkName: "About" */ "@/views/About"),
     meta: {
       title: "关于我",
     },
@@ -26,7 +26,7 @@ export default [
     // 假如要更改路径，还要改RouterLink，还可能要改其他地方 --> 命名路由
     name: "Blog",
     path: "/article",
-    component: Blog,
+    component: () => import(/* webpackChunkName: "Blog" */ "@/views/Blog"),
     meta: {
       title: "文章",
     },
@@ -34,7 +34,7 @@ export default [
   {
     name: "BlogDetail",
     path: "/article/:id",
-    component: Detail,
+    component: () => import(/* webpackChunkName: "BlogDetail" */ "@/views/Blog/Detail.vue"),
     meta: {
       title: "文章详情",
     },
@@ -42,7 +42,7 @@ export default [
   {
     name: "BlogCategory",
     path: "/article/cate/:categoryId",
-    component: Blog,
+    component: () => import(/* webpackChunkName: "Blog" */ "@/views/Blog"),
     meta: {
       title: "文章",
     },
@@ -50,7 +50,7 @@ export default [
   {
     name: "Message",
     path: "/message",
-    component: Message,
+    component: () => import(/* webpackChunkName: "Message" */ "@/views/Message"),
     meta: {
       title: "留言板",
     },
@@ -58,7 +58,7 @@ export default [
   {
     name: "Project",
     path: "/project",
-    component: Project,
+    component: () => import(/* webpackChunkName: "Project" */ "@/views/Project"),
     meta: {
       title: "项目&效果",
     },
