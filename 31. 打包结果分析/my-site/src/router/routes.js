@@ -6,6 +6,7 @@ import Project from "@/views/Project";
 import Detail from "@/views/Blog/Detail.vue";*/
 import { start, done, configure } from 'nprogress'
 import 'nprogress/nprogress.css'
+import NotFound from "@/views/NotFound.vue";
 
 configure({
   showSpinner: false,
@@ -100,4 +101,9 @@ export default [
       title: "项目&效果",
     },
   },
+  {
+    name: 'NotFound',
+    path: '*',
+    component: NotFound,
+  }
 ];
