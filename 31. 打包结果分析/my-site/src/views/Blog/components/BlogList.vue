@@ -50,6 +50,8 @@
         </div>
       </li>
     </ul>
+    <!--当 data.rows 不存在或者长度为0时都显示-->
+    <Empty v-if="(!data.rows || data.rows.length === 0) && !isLoading" />
     <!-- 分页放到这里 -->
     <Pager
       v-if="data.total"
@@ -68,11 +70,13 @@ import Pager from "@/components/Pager/index.vue";
 import fetchData from "@/mixins/fetchData";
 import { dateFormat } from "@/utils";
 import mainScroll from "@/mixins/mainScroll";
+import Empty from "@/components/Empty/index.vue";
 
 export default {
-  mixins: [fetchData({}), mainScroll('container')],
+  mixins: [fetchData({ rows: [], total: 0 }), mainScroll('container')],
   components: {
     Pager,
+    Empty,
   },
   computed: {
     routeInfo() {
